@@ -1,0 +1,1 @@
+this package must include migration files to manage database schema changes
