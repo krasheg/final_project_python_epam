@@ -9,8 +9,8 @@ Functions:
 
 from models.department import Department
 from models.employee import Employee
-from app import db
-# db.create_all()
+from department_app import db
+db.create_all()
 
 
 def populate_database():

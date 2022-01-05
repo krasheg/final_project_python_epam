@@ -1,4 +1,4 @@
-from department_app.app import db
+from department_app import db
 
 
 #from department import Department
@@ -38,6 +38,6 @@ class Employee(db.Model):
         Returns string representation of employee
 
         """
-        return f'Employee({self.name}, {self.date_of_birth}, {self.salary})'
+        return f'Employee({self.name}, {self.birth_date}, {self.salary})'
 
 #db.create_all()
