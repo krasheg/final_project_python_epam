@@ -1,4 +1,4 @@
-from department_app.app import db
+from department_app import db
 
 
 class Department(db.Model):
@@ -23,10 +23,10 @@ class Department(db.Model):
     employees = db.relationship("Employee", backref=db.backref('department'))
 
 
-    def __init__(self, name, organisation, avg_salary=0, employees=None):
+    def __init__(self, name, organisation, employees=None):
         self.name = name
         self.organisation = organisation
-        self.avg_salary = avg_salary
+        self.average_salary = 0
         if not employees:
             employees = []
         #: Employees that working in the department
