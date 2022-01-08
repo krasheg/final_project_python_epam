@@ -1,7 +1,7 @@
 from department_app import db
 
 
-#from department import Department
+# from department import Department
 
 class Employee(db.Model):
     """
@@ -19,7 +19,7 @@ class Employee(db.Model):
     name = db.Column(db.String(30), nullable=False)
 
     #: Employee`s date of birth, cannot be empty
-    birth_date = db.Column(db.String(10), nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
 
     #: department id`s which employee belongs
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
@@ -33,11 +33,24 @@ class Employee(db.Model):
         self.salary = salary
         self.department = department
 
-    def __repr__(self):
+    def json(self):
         """
-        Returns string representation of employee
-
+        json representation of employee
+        :return: dict
         """
-        return f'Employee({self.name}, {self.birth_date}, {self.salary})'
+        return {'name': self.name, 'birth_date': self.birth_date, 'salary': self.salary,
+                'department': self.department}
 
-#db.create_all()
+    def save_to_db(self):
+        """
+        saving changes to database
+        :return: None
+        """
+        db.session.add(self)
+        db.session.commit()
+    # def __repr__(self):
+    #     """
+    #     Returns string representation of employee
+    #
+    #     """
+    #     return f'Employee({self.name}, {self.birth_date}, {self.salary})'

@@ -7,7 +7,7 @@ following classes:
 from department_app import db
 from department_app.models.employee import Employee
 from sqlalchemy import and_
-
+import json
 
 class EmployeeService:
     """
@@ -40,21 +40,42 @@ class EmployeeService:
     @staticmethod
     def add_employee(employee_json):
         """
-
-        :param employee_json:
-        :return:
+        add a new employee to database
+        :param employee_json: dict with employee data
+        :return: employee
         """
-        pass
+        data = json.loads(employee_json)
+        try:
+            employee = Employee(**data)
+            db.session.add(employee)
+            db.session.commit()
+            return employee
+        except:
+            raise ValueError("Incorrect data")
 
     @classmethod
     def update_employee(cls, id, employee_json):
         """
-
-        :param id:
-        :param employee_json:
-        :return:
+        Updates employee data from json and his id
+        :param id: id of employee for update
+        :param employee_json: data for update
+        :return: updated employee
         """
-        pass
+        employee = cls.get_employee_by_id(id)
+        data = json.loads(employee_json)
+        if not employee:
+            raise ValueError(f"Could not find employee by {id=}")
+        if data['name']:
+            employee.name = data['name']
+        if data['birth_date']:
+            employee.birth_date = data['birth_date']
+        if data['salary']:
+            employee.birth_date = data['salary']
+        if data['department']:
+            employee.department = data['department']
+        db.session.add(employee)
+        db.session.commit()
+        return employee
 
     @classmethod
     def delete_employee(cls, id):
@@ -64,7 +85,7 @@ class EmployeeService:
         """
         employee = cls.get_employee_by_id(id)
         if not employee:
-            return {"message": "Could not find employee"}
+            raise ValueError("Could not find employee")
         db.session.delete(employee)
         db.session.commit()
 

@@ -7,8 +7,9 @@ Functions:
 - `populate_database`: populate database with employees and departments
 """
 
-from models.department import Department
-from models.employee import Employee
+from datetime import date
+from department_app.models.department import Department
+from department_app.models.employee import Employee
 from department_app import db
 db.create_all()
 
@@ -19,18 +20,18 @@ def populate_database():
 
     :return: None
     """
-    department_1 = Department('Research and Development', 'Google', 1000)
-    department_2 = Department('Purchasing', 'Amazon', 2000)
-    department_3 = Department('Human Resource Management', 'Huawei', 3000)
+    department_1 = Department('Research and Development', 'Google')
+    department_2 = Department('Purchasing', 'Amazon')
+    department_3 = Department('Human Resource Management', 'Huawei')
 
     db.session.add(department_1)
     db.session.add(department_2)
     db.session.add(department_3)
 
 
-    employee_1 = Employee('John Doe', '02-12-1979', 2000, department_1)
-    employee_2 = Employee('Jane Wilson', '14-05-1983', 2100, department_2)
-    employee_3 = Employee('Will Hunting', '21-08-1988', 1800, department_3)
+    employee_1 = Employee('John Doe', date(1985, 5, 12), 2000, department_1)
+    employee_2 = Employee('Jane Wilson', date(1971, 7, 10), 2100, department_2)
+    employee_3 = Employee('Will Hunting', date(1996, 9, 12), 1800, department_3)
 
 
     db.session.add(employee_1)

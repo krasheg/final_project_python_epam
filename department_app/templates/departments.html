@@ -1,11 +1,34 @@
 {% extends 'base.html' %}
+{% block title %}Departments:{% endblock %}
 
 {% block content %}
-<h3>Departments:</h3>
 <ul>
     {% for department in departments %}
-    <li>{{ department }}</li>
+    <br>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>{{department.name}}</h2>
+            <p>Organisation: {{department.organisation}}</p>
+            <!--            make a link to employees with employees = department.emplaoyees-->
+            <p>Employees: {{department.employees|length}}</p>
+            <p>Average salary: {{department.average_salary}}</p>
+            <a href="/departments/{{ department.id }}/delete">
+                <button class="btn btn-dark float-end" type="button">Delete</button>
+            </a>
+            <a href="/departments/{{ department.id }}/update">
+                <button class="btn btn-success float-end" type="button">update</button>
+            </a>
+        </div>
+    </div>
+    </div>
+    <br>
+
     {% endfor %}
+    <br>
+    <a href="/department/">
+                <button class="btn btn-dark float-start" type="button">add new department</button>
+            </a>
+    <br>
 </ul>
 
 

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Manage department{% endblock %}
+{% block content %}
+{%if not department%}
+<div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Add Departments</h2>
+          <form action="/department/" method="post">
+                  <label for="name"><h5>Name:</h5></label><br>
+                  <input class="form-control" id="name" name="name" type="text" placeholder="Default input"><br>
+                  <label for="organisation"><h5>Organisation:</h5></label><br>
+                  <input class="form-control" type="text" id="organisation" name="organisation"><br>
+                  <input type="submit" class="btn btn-dark" value="Add department">
+          </form>
+
+        </div>
+      </div>
+    </div>
+{% else %}
+<div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Update Departments</h2>
+          <form action="/departments/{{department.id}}/update" method="post">
+                  <label for="uname"><h5>Name:</h5></label><br>
+                  <input class="form-control" id="uname" name="uname" type="text" placeholder="{{department.name}}"><br>
+                  <label for="uorganisation"><h5>Organisation:</h5></label><br>
+                  <input class="form-control" type="text" id="uorganisation" name="uorganisation"
+                         placeholder="{{department.organisation}}"><br>
+                  <input type="submit" class="btn btn-dark" value="Update">
+          </form>
+
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+{% endblock content %}
+
+<!--jumbotron for department-->
+

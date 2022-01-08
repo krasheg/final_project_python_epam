@@ -1,15 +1,36 @@
 {% extends 'base.html' %}
+{% block title %}Employees:{% endblock %}
 
-{%block title%}
-<title>Employees </title>
-{% endblock title %}
-
-{%block content%}
-<h3>Employees:</h3>
+{% block content %}
 <ul>
-    {% for emp in employees %}
-    <li>{{ emp }}</li>
+    {% for employee in employees %}
+    <br>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>{{employee.name}}</h2>
+            <p><b>Birth date:</b> {{employee.birth_date}}</p>
+            <!--            make a link to employees with employees = department.emplaoyees-->
+            <p><b>Salary:</b> {{employee.salary}}</p>
+            <p><b>Department:</b> {{employee.department.name}}</p>
+            <a href="/employees/{{ employee.id }}/delete">
+                <button class="btn btn-dark float-end" type="button">Delete</button>
+            </a>
+            <a href="/employees/{{ employee.id }}/update">
+                <button class="btn btn-success float-end" type="button">Update</button>
+            </a>
+            <br>
+        </div>
+    </div>
+    </div>
+    <br>
+
     {% endfor %}
+    <br>
+    <a href="/employee/">
+                <button class="btn btn-dark float-start" type="button">add new employee</button>
+            </a>
+    <br>
 </ul>
+
 
 {% endblock content %}
