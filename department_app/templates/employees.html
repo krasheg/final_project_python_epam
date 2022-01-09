@@ -2,13 +2,50 @@
 {% block title %}Employees:{% endblock %}
 
 {% block content %}
+<!--find employees-->
+<div class="accordion accordion-flush m-4 col-md-6 bg-light border rounded-3" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed bg-light border rounded-3 text-align-center" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                    aria-controls="flush-collapseOne">
+                <b>Search by date</b>
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+             data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body bg-light border rounded-3">
+                <form class="d-flex" action="/employees/search_by_date/" method="post">
+                    <div>
+                        <label for="date"><h5>Search by birth date:</h5></label><br>
+                        <input class="form-control" type="date" id="date" name="date"><br>
+                        <button class="btn btn-outline-success float-right" type="submit">Search</button>
+                        <br>
+                        <br>
+                    </div>
+                </form>
+                <form class="d-flex" action="/employees/search_by_period/" method="post">
+                    <div>
+                        <label for="first_date"><h5>Search by birth date period:</h5></label><br>
+                        <input class="form-control" type="date" id="first_date" name="first_date"><br>
+                        <input class="form-control" type="date" id="last_date" name="last_date"><br>
+                        <button class="btn btn-outline-success float-right" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
 <ul>
     {% for employee in employees %}
     <br>
     <div class="col-md-6">
         <div class="h-100 p-5 bg-light border rounded-3">
             <h2>{{employee.name}}</h2>
-            <p><b>Birth date:</b> {{employee.birth_date}}</p>
+            <p><b>Birth date:</b> {{employee.birth_date.strftime('%m-%d-%Y')}}</p>
             <!--            make a link to employees with employees = department.emplaoyees-->
             <p><b>Salary:</b> {{employee.salary}}</p>
             <p><b>Department:</b> {{employee.department.name}}</p>
@@ -27,8 +64,8 @@
     {% endfor %}
     <br>
     <a href="/employee/">
-                <button class="btn btn-dark float-start" type="button">add new employee</button>
-            </a>
+        <button class="btn btn-dark float-start" type="button">add new employee</button>
+    </a>
     <br>
 </ul>
 

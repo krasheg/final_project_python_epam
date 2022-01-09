@@ -6,6 +6,7 @@ from datetime import date, datetime
 from department_app import db
 from department_app.models.employee import Employee
 from department_app.models.department import Department
+from department_app.service.employee_service import EmployeeService
 
 employees_bp = Blueprint('employees_bp', __name__, template_folder='templates')
 
@@ -86,6 +87,7 @@ def update_employee(id):
                 return "An error occurred while saving employee`s data"
     return render_template('employee.html', employee=employee, update=update, departments=departments)
 
+
 @employees_bp.route("/employees/<int:id>/delete")
 def delete_employee(id):
     employee = Employee.query.get(id)
@@ -103,3 +105,29 @@ def show_employees():
     """
     employees = Employee.query.all()
     return render_template('employees.html', employees=employees)
+
+
+@employees_bp.route('/employees/search_by_date/', methods=['GET','POST'])
+def show_employees_by_date():
+    """
+    Show all employees born in definite date
+
+    """
+    if request.method == 'POST':
+        date = request.form['date']
+        employees = EmployeeService.get_employees_with_certain_birth_date(date)
+        return render_template('employees.html', employees=employees)
+    return "An error occurred while returning employee"
+
+@employees_bp.route('/employees/search_by_period/', methods=['GET','POST'])
+def show_employees_by_period():
+    """
+    Show all employees born in definite period
+    :return:
+    """
+    if request.method == 'POST':
+        first_date = request.form['first_date']
+        last_date = request.form['last_date']
+        employees = EmployeeService.get_employees_born_in_period(first_date, last_date)
+        return render_template('employees.html', employees=employees)
+    return "An error occurred while returning employee"
