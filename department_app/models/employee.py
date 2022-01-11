@@ -38,8 +38,9 @@ class Employee(db.Model):
         json representation of employee
         :return: dict
         """
-        return {'name': self.name, 'birth_date': self.birth_date, 'salary': self.salary,
-                'department': self.department}
+        return {"id": self.id, 'name': self.name, 'birth_date': self.birth_date.strftime("%m-%d-%Y"),
+                'salary': self.salary,
+                'department': {'name': self.department.name, "organisation": self.department.organisation}}
 
     def save_to_db(self):
         """

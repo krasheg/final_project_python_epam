@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}Manage employee{% endblock %}
 {% block content %}
-{%if not update%}
+
+{%if update == False%}
 <br>
 <div class="col-md-6">
         <div class="h-100 p-5 bg-light border rounded-3">
@@ -16,7 +17,7 @@
                   <label for="department"><h5>Department:</h5></label>
                   <select class="form-control" id="department" name="department">
                       {% for department in departments%}
-                      <option>{{department.name}}</option>
+                      <option>{{department.name}}, {{department.organisation}}</option>
                       {% endfor %}
                     </select>
                   <br>
@@ -32,20 +33,20 @@
 <div class="col-md-6">
         <div class="h-100 p-5 bg-light border rounded-3">
           <h2>Update Employee</h2>
-          <form action="/employee/" method="post">
+          <form action="/employees/{{employee.id}}/update" method="post">
                   <label for="name"><h5>Name:</h5></label><br>
-                  <input class="form-control" id="uname" name="name" type="text" placeholder= "{{employee.name}}" ><br>
+                  <input class="form-control" id="uname" name="uname" type="text" placeholder= "{{employee.name}}" ><br>
                   <label for="birth_date"><h5>Birth date:</h5></label><br>
-                  <input class="form-control" type="date" id="ubirth_date" name="birth_date"
+                  <input class="form-control" type="date" id="ubirth_date" name="ubirth_date"
                          value="{{employee.birth_date}}"><br>
                   <label for="salary"><h5>Salary:</h5></label><br>
-                  <input class="form-control" id="usalary" name="salary" type="number" min="0"
+                  <input class="form-control" id="usalary" name="usalary" type="number" min="0"
                          placeholder="{{employee.salary}}"><br>
                   <label for="department"><h5>Department:</h5></label>
-                  <select class="form-control" id="udepartment" name="department">
-                      <option value="" disabled selected>{{employee.department.name}}</option>
+                  <select class="form-control" id="udepartment" name="udepartment">
+                      <option value="" disabled selected>{{employee.department.name}}, {{employee.department.organisation}}</option>
                       {% for department in departments%}
-                      <option>{{department.name}}</option>
+                      <option>{{department.name}}, {{department.organisation}}</option>
                       {% endfor %}
                     </select>
                   <br>

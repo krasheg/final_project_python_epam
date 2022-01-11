@@ -6,8 +6,11 @@ following classes:
 """
 from department_app import db
 from department_app.models.employee import Employee
+from department_app.service.department_service import DepartmentService
 from sqlalchemy import and_
+from datetime import datetime
 import json
+
 
 class EmployeeService:
     """
@@ -35,23 +38,31 @@ class EmployeeService:
         try:
             return db.session.query(Employee).filter_by(id=employee_id).first()
         except:
-            return None
+            raise ValueError("No such employee in database")
 
     @staticmethod
     def add_employee(employee_json):
         """
         add a new employee to database
-        :param employee_json: dict with employee data
-        :return: employee
+        :return: employee in json
         """
-        data = json.loads(employee_json)
         try:
-            employee = Employee(**data)
-            db.session.add(employee)
-            db.session.commit()
-            return employee
+            name = employee_json['name']
+            birth_date = datetime.strptime(employee_json['birth_date'], '%m-%d-%Y')
+            salary = employee_json['salary']
+            department_name = employee_json['department']['name']
+            department_organisation = employee_json['department']['organisation']
         except:
             raise ValueError("Incorrect data")
+        try:
+            department = DepartmentService.get_department_by_name_and_organization(department_name,
+                                                                                   department_organisation)
+        except ValueError:
+            raise KeyError("No such department")
+
+        employee = Employee(name, birth_date, salary, department)
+        employee.save_to_db()
+        return employee.json()
 
     @classmethod
     def update_employee(cls, id, employee_json):
@@ -62,20 +73,26 @@ class EmployeeService:
         :return: updated employee
         """
         employee = cls.get_employee_by_id(id)
-        data = json.loads(employee_json)
+        data = employee_json
+
         if not employee:
             raise ValueError(f"Could not find employee by {id=}")
-        if data['name']:
+        if data.get('name'):
             employee.name = data['name']
-        if data['birth_date']:
-            employee.birth_date = data['birth_date']
-        if data['salary']:
-            employee.birth_date = data['salary']
-        if data['department']:
-            employee.department = data['department']
-        db.session.add(employee)
-        db.session.commit()
-        return employee
+        if data.get('birth_date'):
+            employee.birth_date = datetime.strptime(data['birth_date'], '%m-%d-%Y')
+        if data.get('salary'):
+            employee.salary = int(data['salary'])
+        if data.get('department'):
+            department = DepartmentService.get_department_by_name_and_organization(data['department']['name'],
+                                                                                   data['department']['organisation'])
+            employee.department = department
+        try:
+
+            employee.save_to_db()
+            return employee
+        except ValueError:
+            return {'message': 'An error occurred while saving employee'}
 
     @classmethod
     def delete_employee(cls, id):

@@ -22,7 +22,8 @@ class DepartmentService:
         :return: all departments
         """
         try:
-            return Department.query.all()
+
+            return db.session.query(Department).all()
         except:
             raise ValueError('An error occurred while returning all departments')
 
@@ -62,8 +63,7 @@ class DepartmentService:
         """
         try:
             department = Department(department_json['name'], department_json['organisation'])
-            db.session.add(department)
-            db.session.commit()
+            department.save_to_db()
         except:
             raise ValueError(f"Can not add department with name {department_json['name']} "
                              f"and organisation {department_json['organisation']}")
@@ -80,12 +80,11 @@ class DepartmentService:
         department = cls.get_department_by_id(department_id)
         if not department:
             raise ValueError('Invalid department id')
-        if department_json['name']:
+        if department_json.get('name'):
             department.name = department_json['name']
-        if department_json['organisation']:
+        if department_json.get('organisation'):
             department.organisation = department_json['organisation']
-        db.session.add(department)
-        db.session.commit()
+        department.save_to_db()
         return department
 
     @classmethod

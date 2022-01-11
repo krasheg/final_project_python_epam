@@ -49,11 +49,37 @@
             <!--            make a link to employees with employees = department.emplaoyees-->
             <p><b>Salary:</b> {{employee.salary}}</p>
             <p><b>Department:</b> {{employee.department.name}}</p>
-            <a href="/employees/{{ employee.id }}/delete">
-                <button class="btn btn-dark float-end" type="button">Delete</button>
-            </a>
+            <p><b>Organisation:</b> {{employee.department.organisation}}</p>
+                <!-- Button trigger modal -->
+            <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{employee.id}}">
+                Delete
+            </button>
             <a href="/employees/{{ employee.id }}/update">
-                <button class="btn btn-success float-end" type="button">Update</button>
+                <button class="btn btn-success float-end" type="button">update</button>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{employee.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{employee.id}}"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel{{employee.id}}">Delete {{employee.name}}?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete employee?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/employees/{{ employee.id }}/delete">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             </a>
             <br>
         </div>
@@ -71,3 +97,6 @@
 
 
 {% endblock content %}
+{% block script %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock script %}

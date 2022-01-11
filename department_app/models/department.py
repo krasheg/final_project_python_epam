@@ -19,6 +19,8 @@ class Department(db.Model):
     #: department`s organisation name, cannot be empty
     organisation = db.Column(db.String(30), nullable=False)
 
+    #: average salary of the department
+    average_salary = db.Column(db.Integer, nullable=False)
 
     #: Employees that working in the department
     employees = db.relationship(
@@ -28,22 +30,22 @@ class Department(db.Model):
         lazy=True
     )
 
-
-
-
-
-    def __init__(self, name, organisation):
+    def __init__(self, name, organisation, average_salary=0, employees=None):
         self.name = name
         self.organisation = organisation
-        self.average_salary = 0
+        self.average_salary = average_salary
+        if not employees:
+            employees = []
+        self.employees = employees
 
     def json(self):
         """
         json representation of department
         :return: dict
         """
-        return {'name': self.name, 'organisation': self.organisation, 'average_salary': self.average_salary}
-
+        return {"id": self.id, 'name': self.name, 'organisation': self.organisation,
+                'average_salary': self.average_salary,
+                'employees': [employee.name for employee in self.employees]}
 
     def save_to_db(self):
         """

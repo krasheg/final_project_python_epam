@@ -2,11 +2,12 @@
 
 
 from flask import Blueprint, render_template, request, redirect
-from datetime import date, datetime
+from datetime import datetime
 from department_app import db
 from department_app.models.employee import Employee
 from department_app.models.department import Department
 from department_app.service.employee_service import EmployeeService
+from department_app.service.department_service import DepartmentService
 
 employees_bp = Blueprint('employees_bp', __name__, template_folder='templates')
 
@@ -26,16 +27,14 @@ def add_employee():
         name = request.form['name']
         birth_date = datetime.strptime(request.form['birth_date'], '%Y-%m-%d')
         salary = request.form['salary']
-        department = request.form['department']
+        department_name = request.form['department'].split(', ')[0]
+        department_organisation = request.form['department'].split(', ')[1]
         #: check if there is unique employee
         for employee in employees:
             if employee.name == name and employee.birth_date == birth_date:
                 return redirect('/employees/')
-        for dep in departments:
-            if dep.name == department:
-                department = dep
-                break
-        else:
+        department = DepartmentService.get_department_by_name_and_organization(department_name,department_organisation)
+        if not department:
             return "No such department"
         employee = Employee(name, birth_date, salary, department)
         try:
@@ -43,7 +42,7 @@ def add_employee():
             return redirect('/employees/')
         except:
             return "An error occurred while saving to database database"
-    return render_template('employee.html', departments=departments, employees=employees)
+    return render_template('employee.html', departments=departments, employees=employees, update=False)
 
 
 @employees_bp.route("/employees/<int:id>/update", methods=["GET", "POST"])
@@ -53,7 +52,6 @@ def update_employee(id):
 
     """
     #: marker for form
-    update = True
     #: find employee by his id
     employee = Employee.query.get(id)
     #: all departments in database
@@ -62,7 +60,7 @@ def update_employee(id):
         name = request.form['uname']
         birth_date = datetime.strptime(request.form['ubirth_date'], '%Y-%m-%d')
         salary = request.form['usalary']
-        department = request.form['udepartment']
+        department = request.form.get('udepartment')
         #: apply only non-empty data
         if name:
             employee.name = name
@@ -70,22 +68,18 @@ def update_employee(id):
             employee.birth_date = birth_date
         if salary:
             employee.salary = salary
-        if department:
-            #: swap department name from form to his id in database
-            for dep in departments:
-                if dep.name == department:
-                    department = dep
-                    break
-            else:
-                return "No such department"
+        if department is not None:
+            department_name = department.split(', ')[0]
+            department_organisation = department.split(', ')[1]
+            department = DepartmentService.get_department_by_name_and_organization(department_name,
+                                                                                   department_organisation)
             employee.department = department
-
-            try:
-                db.session.commit()
-                return redirect('/employees/')
-            except:
-                return "An error occurred while saving employee`s data"
-    return render_template('employee.html', employee=employee, update=update, departments=departments)
+        try:
+            db.session.commit()
+            return redirect('/employees/')
+        except:
+            return "An error occurred while saving employee`s data"
+    return render_template('employee.html', employee=employee, update=True, departments=departments)
 
 
 @employees_bp.route("/employees/<int:id>/delete")
