@@ -1,6 +1,5 @@
 """ Views for manage employees on web application"""
 
-
 from flask import Blueprint, render_template, request, redirect
 from datetime import datetime
 from department_app.models.employee import Employee
@@ -32,14 +31,9 @@ def add_employee():
             if employee.name == name and employee.birth_date == birth_date:
                 return redirect('/employees/')
         department = DepartmentService.get_department_by_name_and_organization(department_name, department_organisation)
-        if not department:
-            return "No such department"
         employee = Employee(name, birth_date, salary, department)
-        try:
-            employee.save_to_db()
-            return redirect('/employees/')
-        except:
-            return "An error occurred while saving to database database"
+        employee.save_to_db()
+        return redirect('/employees/')
     return render_template('employee.html', departments=departments, employees=employees, update=False)
 
 
@@ -72,21 +66,18 @@ def update_employee(id):
             department = DepartmentService.get_department_by_name_and_organization(department_name,
                                                                                    department_organisation)
             employee.department = department
-        try:
-            employee.save_to_db()
-            return redirect('/employees/')
-        except:
-            return "An error occurred while saving employee`s data"
+
+        employee.save_to_db()
+        return redirect('/employees/')
     return render_template('employee.html', employee=employee, update=True, departments=departments)
 
 
 @employees_bp.route("/employees/<int:id>/delete")
 def delete_employee(id):
     employee = Employee.query.get(id)
-    if employee:
-        EmployeeService.delete_employee(employee)
-        return redirect('/employees/')
-    return "An error occurred while deleting employee"
+    EmployeeService.delete_employee(employee)
+    return redirect('/employees/')
+
 
 
 @employees_bp.route('/employees/')

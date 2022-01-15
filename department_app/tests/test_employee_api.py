@@ -125,6 +125,9 @@ class TestEmployeeApi(BaseTestCase):
         self.assertEqual({'message': 'Bad request'}, response.json)
 
     def test_delete_employee(self):
+        """
+        test for deleting employee
+        """
         department_1 = Department('Engineering', 'Bethesda Softworks')
         department_1.save_to_db()
         employee_1 = Employee('Todd Howard', date(1985, 5, 12), 6000, department_1)

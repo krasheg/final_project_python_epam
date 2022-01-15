@@ -16,18 +16,16 @@ def add_department():
     Collect department's input data from forms and add it to database
     """
     if request.method == 'POST':
-        department = None
         form = request.form
         name = form['name']
         organisation = form['organisation']
-        if DepartmentService.get_department_by_name_and_organization(name, organisation):
-            return redirect('/departments')
         try:
+            if DepartmentService.get_department_by_name_and_organization(name, organisation):
+                return redirect('/departments')
+        except ValueError:
             department = Department(name, organisation)
             department.save_to_db()
             return redirect('/departments')
-        except:
-            return "An error occurred while saving the department"
     departments = Department.query.all()
     return render_template('department.html', departments=departments)
 

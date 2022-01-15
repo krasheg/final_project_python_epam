@@ -3,6 +3,7 @@ from http import HTTPStatus
 import unittest
 from department_app.tests.test_base import BaseTestCase
 from department_app import app
+from department_app.models.department import Department
 
 
 class TestDepartmentView(BaseTestCase):
@@ -25,6 +26,10 @@ class TestDepartmentView(BaseTestCase):
         client = app.test_client()
         response = client.get('/department/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
+        data = {"name": "Test",
+                "organisation": "Test Organization"}
+        response = client.post('/department/', data=data)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_update_department_page(self):
         """
@@ -33,6 +38,13 @@ class TestDepartmentView(BaseTestCase):
         client = app.test_client()
         response = client.get('/departments/1/update')
         self.assertEqual(response.status_code, HTTPStatus.OK)
+        department = Department("Created name", "Created organisation")
+        department.save_to_db()
+        data = {"name": "Test",
+                "organisation": "Test Organization"}
+        response = client.get('/departments/1/update',data=data)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
 
     def test_delete_department_page(self):
         """
