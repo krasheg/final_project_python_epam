@@ -1,15 +1,8 @@
-import os
-import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_restful import Api
-import logging.config
 from config import Config
-from department_app.views.index_view import index_bp
-from department_app.views.department_view import departments_bp
-from department_app.views.employee_view import employees_bp
-from department_app.rest import department_api, employee_api
 
 app = Flask(__name__)
 # apply configuration
@@ -19,11 +12,15 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db, directory=Config.MIGRATION_DIR)
 
 db.create_all()
+from department_app.views.index_view import index_bp
+from department_app.views.department_view import departments_bp
+from department_app.views.employee_view import employees_bp
 
 app.register_blueprint(index_bp)
 app.register_blueprint(employees_bp)
 app.register_blueprint(departments_bp)
 
+from department_app.rest import department_api, employee_api
 # api
 api = Api(app)
 # api for department
@@ -34,6 +31,8 @@ api.add_resource(employee_api.EmployeeListApi, '/api/employees')
 api.add_resource(employee_api.EmployeeApi, '/api/employees/<id>')
 api.add_resource(employee_api.EmployeeSearchApi, '/api/employees/search')
 
+import logging
+import sys
 # logging
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s: %(message)s')
 

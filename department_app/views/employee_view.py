@@ -3,7 +3,6 @@
 
 from flask import Blueprint, render_template, request, redirect
 from datetime import datetime
-from department_app import db
 from department_app.models.employee import Employee
 from department_app.models.department import Department
 from department_app.service.employee_service import EmployeeService
@@ -23,7 +22,6 @@ def add_employee():
     employees = Employee.query.all()
 
     if request.method == 'POST':
-        update = False  # marker for form
         name = request.form['name']
         birth_date = datetime.strptime(request.form['birth_date'], '%Y-%m-%d')
         salary = request.form['salary']
@@ -75,7 +73,7 @@ def update_employee(id):
                                                                                    department_organisation)
             employee.department = department
         try:
-            db.session.commit()
+            employee.save_to_db()
             return redirect('/employees/')
         except:
             return "An error occurred while saving employee`s data"
@@ -86,8 +84,7 @@ def update_employee(id):
 def delete_employee(id):
     employee = Employee.query.get(id)
     if employee:
-        db.session.delete(employee)
-        db.session.commit()
+        EmployeeService.delete_employee(employee)
         return redirect('/employees/')
     return "An error occurred while deleting employee"
 

@@ -1,6 +1,7 @@
 from department_app import db
 
 
+
 class Department(db.Model):
     """
         Department model, inherited from SQLAlchemy, describe our departments in our table
