@@ -1,9 +1,8 @@
-#: file contains tests for department views
-
-from test_base import BaseTestCase
-from department_app import app
+"""file contains tests for department views"""
 from http import HTTPStatus
 import unittest
+from department_app.tests.test_base import BaseTestCase
+from department_app import app
 
 
 class TestDepartmentView(BaseTestCase):

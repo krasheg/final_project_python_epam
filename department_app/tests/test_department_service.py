@@ -1,11 +1,11 @@
-#: file contains tests for departments services
+"""file contains tests for departments services"""
 
-from test_base import BaseTestCase
+from datetime import date
+import unittest
+from department_app.tests.test_base import BaseTestCase
 from department_app.models.department import Department
 from department_app.models.employee import Employee
 from department_app.service.department_service import DepartmentService
-from datetime import date
-import unittest
 
 
 class TestDepartmentService(BaseTestCase):

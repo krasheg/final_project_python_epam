@@ -1,9 +1,8 @@
 """
 This module has base test class for inherit configuration with setup
 """
-
-from config import TestConfig
 import unittest
+from config import TestConfig
 from department_app import app, db
 
 

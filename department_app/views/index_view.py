@@ -1,6 +1,5 @@
 '''
 View for web application`s homepage
-
 '''
 
 from flask import Blueprint, render_template

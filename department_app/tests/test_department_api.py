@@ -1,7 +1,8 @@
-from test_base import BaseTestCase
+"""file contains tests for department api"""
 import http
 import unittest
 import json
+from department_app.tests.test_base import BaseTestCase
 from department_app.models.department import Department
 from mockup_data import department_1, department_2, department_3
 

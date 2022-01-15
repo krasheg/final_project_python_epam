@@ -1,4 +1,4 @@
-#: Views for manage employees on web application,
+""" Views for manage employees on web application"""
 
 
 from flask import Blueprint, render_template, request, redirect

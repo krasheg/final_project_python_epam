@@ -1,12 +1,11 @@
-#: This file consists of tests for employee services
-
-from test_base import BaseTestCase
+"""This file consists of tests for employee services"""
+from datetime import date
+import unittest
+from department_app.tests.test_base import BaseTestCase
 from department_app import app
 from department_app.models.department import Department
 from department_app.models.employee import Employee
 from department_app.service.employee_service import EmployeeService
-from datetime import date
-import unittest
 
 
 class TestEmployeeService(BaseTestCase):
@@ -18,7 +17,6 @@ class TestEmployeeService(BaseTestCase):
         """
         test for get employees service
         """
-        client = app.test_client()
         department = Department("Test name", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Jack Sparrow', date(1985, 5, 25), 2200, department)

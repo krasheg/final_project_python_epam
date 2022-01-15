@@ -1,3 +1,25 @@
+"""
+Main module
+Initializes web application and web service, contains following subpackages and
+modules:
+
+Subpackages:
+
+- `database`: contains modules used to populate database
+- `migrations`: contains migration files used to manage database schema
+- `models`: contains modules with Python classes describing database models
+- `rest`: contains modules with RESTful service implementation
+- `schemas`: contains modules with serialization/deserialization schemas for \
+models
+- `service`: contains modules with classes used to work with database
+- `static`: contains web application static files (scripts, styles, images)
+- `templates`: contains web application html templates
+- `views`: contains modules with web controllers/views
+- `tests`: contains modules with unit tests
+"""
+
+import logging
+import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -31,8 +53,7 @@ api.add_resource(employee_api.EmployeeListApi, '/api/employees')
 api.add_resource(employee_api.EmployeeApi, '/api/employees/<id>')
 api.add_resource(employee_api.EmployeeSearchApi, '/api/employees/search')
 
-import logging
-import sys
+
 # logging
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s: %(message)s')
 

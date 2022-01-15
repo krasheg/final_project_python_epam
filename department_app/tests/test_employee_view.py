@@ -1,12 +1,10 @@
-#: file contains tests for employee views
-
-from test_base import BaseTestCase
-from department_app import app
+"""file contains tests for employee views"""
 from http import HTTPStatus
+from datetime import date
+from department_app.tests.test_base import BaseTestCase
+from department_app import app
 from department_app.models.department import Department
 from department_app.models.employee import Employee
-from datetime import date
-import unittest
 
 
 class TestEmployeeView(BaseTestCase):

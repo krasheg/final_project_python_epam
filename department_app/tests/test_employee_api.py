@@ -1,12 +1,12 @@
-#: This file consists of tests for employee api
-from test_base import BaseTestCase
-from datetime import date
-from department_app.models.department import Department
-from department_app.models.employee import Employee
-from department_app import app
+"""This file consists of tests for employee api"""
 import json
 import unittest
 from http import HTTPStatus
+from datetime import date
+from department_app.tests.test_base import BaseTestCase
+from department_app.models.department import Department
+from department_app.models.employee import Employee
+from department_app import app
 
 
 class TestEmployeeApi(BaseTestCase):
@@ -98,7 +98,7 @@ class TestEmployeeApi(BaseTestCase):
         self.assertEqual(employee_1.json(), response.json)
         #: Bad request
         response = client.get("/api/employees/2", )
-        self.assertEqual({'message': f"Couldn`t find employee by id='2'"}, response.json)
+        self.assertEqual({'message': "Couldn`t find employee by id='2'"}, response.json)
 
     def test_put_employee(self):
         """

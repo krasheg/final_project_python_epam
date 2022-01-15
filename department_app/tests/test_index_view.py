@@ -1,9 +1,8 @@
-#: File contains tests for homepage view
-import http
+"""File contains tests for homepage view """
 
-from department_app import app
-from test_base import BaseTestCase
 from http import HTTPStatus
+from department_app import app
+from department_app.tests.test_base import BaseTestCase
 
 
 class TestIndexView(BaseTestCase):
