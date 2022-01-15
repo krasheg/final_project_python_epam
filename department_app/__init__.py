@@ -33,7 +33,6 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db, directory=Config.MIGRATION_DIR)
 
-
 from department_app.views.index_view import index_bp
 from department_app.views.department_view import departments_bp
 from department_app.views.employee_view import employees_bp

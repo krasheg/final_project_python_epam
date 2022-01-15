@@ -2,7 +2,7 @@
 import http
 import unittest
 import json
-from mockup_data import department_1, department_2, department_3
+from department_app.tests.mockup_data import department_1, department_2, department_3
 from department_app.tests.test_base import BaseTestCase
 from department_app.models.department import Department
 

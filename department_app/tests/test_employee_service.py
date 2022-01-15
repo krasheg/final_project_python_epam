@@ -2,7 +2,6 @@
 from datetime import date
 import unittest
 from department_app.tests.test_base import BaseTestCase
-from department_app import app
 from department_app.models.department import Department
 from department_app.models.employee import Employee
 from department_app.service.employee_service import EmployeeService
@@ -101,6 +100,9 @@ class TestEmployeeService(BaseTestCase):
             EmployeeService.update_employee(2, new_data)
 
     def test_delete_employee(self):
+        """
+        test for deleting employee
+        """
         department = Department("department", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department)

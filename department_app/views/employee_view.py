@@ -1,7 +1,6 @@
 """ Views for manage employees on web application"""
-
-from flask import Blueprint, render_template, request, redirect
 from datetime import datetime
+from flask import Blueprint, render_template, request, redirect
 from department_app.models.employee import Employee
 from department_app.models.department import Department
 from department_app.service.employee_service import EmployeeService
@@ -74,6 +73,9 @@ def update_employee(_id):
 
 @employees_bp.route("/employees/<int:_id>/delete")
 def delete_employee(_id):
+    """
+    function for deleting employee by his id
+    """
     EmployeeService.delete_employee(_id)
     return redirect('/employees/')
 

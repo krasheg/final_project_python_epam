@@ -4,12 +4,11 @@ following classes:
 
 - `EmployeeService`, employee service
 """
+from sqlalchemy import and_
+from datetime import datetime
 from department_app import db
 from department_app.models.employee import Employee
 from department_app.service.department_service import DepartmentService
-from sqlalchemy import and_
-from datetime import datetime
-import json
 
 
 class EmployeeService:
@@ -68,7 +67,7 @@ class EmployeeService:
     def update_employee(cls, _id, employee_json):
         """
         Updates employee data from json and his _id
-        :param id: _id of employee for update
+        :param _id: id of employee for update
         :param employee_json: data for update
         :return: updated employee
         """

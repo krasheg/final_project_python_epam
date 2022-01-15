@@ -1,4 +1,4 @@
-#: Data for using in test mocks
+""" Data for using in test mocks"""
 
 from datetime import date
 from department_app.models.department import Department

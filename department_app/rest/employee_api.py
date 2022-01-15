@@ -61,17 +61,15 @@ class EmployeeListApi(Resource):
 
     @staticmethod
     def post():
-        '''
+        """
         Add a new employee with request data
-
         return information about result
-
-        '''
+        """
         employee_json = request.json
         if not employee_json:
             return {'message': 'Empty request'}, 400
 
-        elif not employee_json.get('name') or not employee_json.get('birth_date') or not employee_json.get(
+        if not employee_json.get('name') or not employee_json.get('birth_date') or not employee_json.get(
                 'salary') or not \
                 employee_json.get('department'):
             return {'message': 'Not enough information'}, 400
