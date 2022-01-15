@@ -4,8 +4,8 @@ following classes:
 
 - `EmployeeService`, employee service
 """
-from sqlalchemy import and_
 from datetime import datetime
+from sqlalchemy import and_
 from department_app import db
 from department_app.models.employee import Employee
 from department_app.service.department_service import DepartmentService

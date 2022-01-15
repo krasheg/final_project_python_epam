@@ -68,7 +68,7 @@ class DepartmentService:
             department = Department(department_json['name'], department_json['organisation'])
             department.save_to_db()
         except KeyError:
-            raise ValueError(f"Can not add department")
+            raise ValueError("Can not add department")
         return department
 
     @classmethod
