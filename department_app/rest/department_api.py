@@ -7,7 +7,6 @@ from department_app.models.department import Department
 from department_app.service.department_service import DepartmentService
 
 
-
 class DepartmentListApi(Resource):
     """
     Class for defining department`s list get/put requests
@@ -22,7 +21,6 @@ class DepartmentListApi(Resource):
         DepartmentService.calc_avg_salary(Department.query.all())
         return jsonify([department.json() for department in DepartmentService.get_all_departments()])
 
-
     @staticmethod
     def post():
         '''
@@ -35,7 +33,7 @@ class DepartmentListApi(Resource):
         if not department_json:
             return {'message': 'Empty request'}, 400
 
-        elif not department_json['name'] or not department_json['organisation']:
+        elif not department_json.get('name') or not department_json.get('organisation'):
             return {'message': 'Bad request'}, 400
 
         try:
@@ -59,7 +57,8 @@ class DepartmentApi(Resource):
 
         """
         DepartmentService.calc_avg_salary(Department.query.all())
-        return jsonify(DepartmentService.get_department_by_id(id).json())
+        department = DepartmentService.get_department_by_id(id).json()
+        return department, 200
 
     @staticmethod
     def put(id):
@@ -86,5 +85,4 @@ class DepartmentApi(Resource):
             DepartmentService.delete_department(id)
             return {"message": "Department has been deleted"}, 200
         except ValueError:
-            return {'message': 'Cannot delete department'}
-
+            return {'message': 'Cannot delete department'}, 404

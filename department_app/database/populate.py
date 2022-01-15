@@ -1,6 +1,5 @@
 """
-This module defines is used to populate database with departments and employees,
-it defines the following:
+This module defines is used to populate database with departments and employees.
 
 Functions:
 

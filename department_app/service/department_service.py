@@ -37,7 +37,7 @@ class DepartmentService:
         """
         department = db.session.query(Department).filter_by(id=department_id).first()
         if not department:
-            raise ValueError('No department with id ' + department_id)
+            raise ValueError('No department with id ' + str(department_id))
         return department
 
     @staticmethod
@@ -50,9 +50,12 @@ class DepartmentService:
         :return: department with the same name and organisation like in params
         """
         try:
-            return db.session.query(Department).filter_by(name=name, organisation=organisation).first()
-        except:
-            raise ValueError(f"Department with name {name} and organisation {organisation} does not exist")
+            result = db.session.query(Department).filter_by(name=name, organisation=organisation).first()
+            if not result:
+                raise ValueError
+            return result
+        except Exception:
+            raise ValueError("Department does not exist")
 
     @staticmethod
     def add_department(department_json):
@@ -64,9 +67,8 @@ class DepartmentService:
         try:
             department = Department(department_json['name'], department_json['organisation'])
             department.save_to_db()
-        except:
-            raise ValueError(f"Can not add department with name {department_json['name']} "
-                             f"and organisation {department_json['organisation']}")
+        except KeyError:
+            raise ValueError(f"Can not add department")
         return department
 
     @classmethod
@@ -100,7 +102,6 @@ class DepartmentService:
         db.session.delete(department)
         db.session.commit()
 
-
     @staticmethod
     def calc_avg_salary(departments):
         """
@@ -112,7 +113,7 @@ class DepartmentService:
                 try:
                     department.average_salary = int((sum([employee.salary for employee in department.employees])) / len(
                         department.employees))
-                except ZeroDivisionError:
-                    return "Employee`s salary cannot be zero"
+                except Exception:
+                    raise ValueError("Employee`s salary cannot be zero")
                 department.save_to_db()
         return departments

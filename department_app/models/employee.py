@@ -49,9 +49,4 @@ class Employee(db.Model):
         """
         db.session.add(self)
         db.session.commit()
-    # def __repr__(self):
-    #     """
-    #     Returns string representation of employee
-    #
-    #     """
-    #     return f'Employee({self.name}, {self.birth_date}, {self.salary})'
+

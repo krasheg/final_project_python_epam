@@ -55,9 +55,4 @@ class Department(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    # def __repr__(self):
-    #     """
-    #     Returns string representation of department
-    #
-    #     """
-    #     return f'Employee({self.name}, {self.organisation}, {self.employees})'
+

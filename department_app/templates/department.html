@@ -22,10 +22,10 @@
           <h2>Update Departments</h2>
           <form action="/departments/{{department.id}}/update" method="post">
                   <label for="uname"><h5>Name:</h5></label><br>
-                  <input class="form-control" id="uname" name="uname" type="text" placeholder="{{department.name}}"><br>
+                  <input class="form-control" id="uname" name="uname" type="text" value="{{department.name}}"><br>
                   <label for="uorganisation"><h5>Organisation:</h5></label><br>
                   <input class="form-control" type="text" id="uorganisation" name="uorganisation"
-                         placeholder="{{department.organisation}}"><br>
+                         value="{{department.organisation}}"><br>
                   <input type="submit" class="btn btn-dark" value="Update">
           </form>
 

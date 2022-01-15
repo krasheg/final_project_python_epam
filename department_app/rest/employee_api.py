@@ -1,6 +1,5 @@
 """
 REST operations for working with employees
-
 """
 from flask import jsonify, request
 from flask_restful import Resource
