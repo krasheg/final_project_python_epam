@@ -125,5 +125,5 @@ class EmployeeApi(Resource):
             EmployeeService.delete_employee(id)
             return {"message": "Employee has been deleted"}, 200
         except ValueError:
-            return {'message': 'Cannot delete employee'}
+            return {'message': 'Cannot delete employee'}, 404
 

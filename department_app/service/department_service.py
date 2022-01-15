@@ -106,7 +106,6 @@ class DepartmentService:
     def calc_avg_salary(departments):
         """
         function that calculates the average salary for each department, save it in database  and returns it
-
         """
         for department in departments:
             if department.employees:

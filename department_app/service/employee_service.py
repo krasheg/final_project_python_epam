@@ -35,10 +35,10 @@ class EmployeeService:
         :param employee_id: id of employee
         :return: employee with given id
         """
-        try:
-            return db.session.query(Employee).filter_by(id=employee_id).first()
-        except:
+        employee = db.session.query(Employee).filter_by(id=employee_id).first()
+        if not employee:
             raise ValueError("No such employee in database")
+        return employee
 
     @staticmethod
     def add_employee(employee_json):
@@ -52,7 +52,7 @@ class EmployeeService:
             salary = employee_json['salary']
             department_name = employee_json['department']['name']
             department_organisation = employee_json['department']['organisation']
-        except:
+        except ValueError:
             raise ValueError("Incorrect data")
         try:
             department = DepartmentService.get_department_by_name_and_organization(department_name,
@@ -76,19 +76,20 @@ class EmployeeService:
         data = employee_json
 
         if not employee:
-            raise ValueError(f"Could not find employee by {id=}")
-        if data.get('name'):
+            raise KeyError(f"Could not find employee by {id=}")
+        elif data.get('name'):
             employee.name = data['name']
-        if data.get('birth_date'):
+        elif data.get('birth_date'):
             employee.birth_date = datetime.strptime(data['birth_date'], '%m-%d-%Y')
-        if data.get('salary'):
+        elif data.get('salary'):
             employee.salary = int(data['salary'])
-        if data.get('department'):
+        elif data.get('department'):
             department = DepartmentService.get_department_by_name_and_organization(data['department']['name'],
                                                                                    data['department']['organisation'])
             employee.department = department
+        else:
+            raise ValueError
         try:
-
             employee.save_to_db()
             return employee
         except ValueError:

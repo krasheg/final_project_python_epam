@@ -1,6 +1,3 @@
-
-
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -12,13 +9,14 @@ app = Flask(__name__)
 # apply configuration
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-#db.init_app(app)
+
 
 migrate = Migrate(app, db, directory=Config.MIGRATION_DIR)
 
 from department_app.views.index_view import index_bp
 from department_app.views.department_view import departments_bp
 from department_app.views.employee_view import employees_bp
+
 db.create_all()
 
 app.register_blueprint(index_bp)
