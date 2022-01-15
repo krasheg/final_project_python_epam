@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/krasheg/final_project_python_epam/badge.svg?branch=main)](https://coveralls.io/github/krasheg/final_project_python_epam?branch=main)
 
 # Department App
 
