@@ -74,8 +74,7 @@ def update_employee(id):
 
 @employees_bp.route("/employees/<int:id>/delete")
 def delete_employee(id):
-    employee = Employee.query.get(id)
-    EmployeeService.delete_employee(employee)
+    EmployeeService.delete_employee(id)
     return redirect('/employees/')
 
 

@@ -62,13 +62,16 @@ class TestEmployeeView(BaseTestCase):
                 'usalary': 300,
                 'udepartment': 'Captains, Black Pearl'}
         response = client.post("/employees/1/update", data=data)
-        self.assertEqual(response.status_code,HTTPStatus.FOUND)
-
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_delete_employee_page(self):
         """
         test for deleting employees page
         """
         client = app.test_client()
+        department_1 = Department('Foundation', 'Vodafone')
+        department_1.save_to_db()
+        employee_1 = Employee('Test Employee', date(1956, 5, 12), 2200, department_1)
+        employee_1.save_to_db()
         response = client.get("/employees/1/delete")
-        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
