@@ -27,7 +27,7 @@ When the user enters the home page, they see a large heading and a short descrip
 
 User opens a site and see the home page
 
-![alt text](screenshots/homepage.png)
+![alt text](screenshots/Homepage.PNG)
 
 Pic. 1 The home page
 
@@ -53,7 +53,7 @@ User clicks the 'Departments' which redirects them to the departments page where
 
 6. Delete (Delete a department without any redirects)
 
-![alt text](screenshots/departments.png)
+![alt text](screenshots/departments.PNG)
 
 Pic. 2 The list of departments
 ***
@@ -68,13 +68,13 @@ User clicks the 'Department' button on the home page and pushes the button "upda
 opposite the desired department which redirects them to the department update page where they can change information
 about department.
 
-![alt text](screenshots/update_department.png)
+![alt text](screenshots/update_department.PNG)
 
 Pic. 3.1 Update department page
 ***
 Also user can click on "delete" button opposite chosen department to delete it.
 
-![alt text](screenshots/delete_department.png)
+![alt text](screenshots/delete_department.PNG)
 
 Pic. 3.2 Delete departments
 ***
@@ -82,7 +82,7 @@ Pic. 3.2 Delete departments
 In the very bottom of the departments page user can click "add department" button which redirects them to the department
 creation page were he can create a new department
 
-![alt text](screenshots/add_new_department.png)
+![alt text](screenshots/add_new_department.PNG)
 
 Pic. 3.3 Add department page
 ***
@@ -107,7 +107,7 @@ User clicks the 'Employees' button which redirects them to the employees page wh
 
 6. Delete button (delete an employee )
 
-![alt text](screenshots/employees.png)
+![alt text](screenshots/employees.PNG)
 
 Pic. 4 The list of employees
 ***
@@ -121,20 +121,20 @@ Display employee managing page
 User clicks the 'Employees' button on the home page and push 'update' button opposite chosen employee which redirects
 them to the employees manage page where they can change the information about chosen employee.
 
-![alt text](screenshots/update_employee.png)
+![alt text](screenshots/update_employee.PNG)
 
 Pic. 4.1 Update employee page
 ***
 Also user can click on "delete" button opposite chosen department to delete it.
 
-![alt text](screenshots/delete_employee.png)
+![alt text](screenshots/delete_employee.PNG)
 
 Pic. 4.2 Delete employee
 ***
 In the very bottom of the employees page user can click "add employee" button which redirects them to the employee
 creation page were he can create a new employee
 
-![alt text](screenshots/add_new_employee.png)
+![alt text](screenshots/add_new_employee.PNG)
 
 Pic. 4.2 Add employees
 ***
@@ -148,6 +148,6 @@ Display the list of employees that born in a chosen date or period
 User clicks the 'Search by date' dropdown menu and choose date or date period which redirects them to the page with employees
 that born in searched date or period
 
-![alt text](screenshots/employees_search.png)
+![alt text](screenshots/employees_search.PNG)
 Pic. 5 Search employees
 ***
