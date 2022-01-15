@@ -17,7 +17,7 @@ models
 - `views`: contains modules with web controllers/views
 - `tests`: contains modules with unit tests
 """
-
+# pylint: disable=wrong-import-position, protected-access, cyclic-import
 import logging
 import sys
 from flask import Flask
@@ -43,6 +43,7 @@ app.register_blueprint(employees_bp)
 app.register_blueprint(departments_bp)
 
 from department_app.rest import department_api, employee_api
+
 # api
 api = Api(app)
 # api for department
@@ -52,7 +53,6 @@ api.add_resource(department_api.DepartmentApi, '/api/departments/<id>')
 api.add_resource(employee_api.EmployeeListApi, '/api/employees')
 api.add_resource(employee_api.EmployeeApi, '/api/employees/<id>')
 api.add_resource(employee_api.EmployeeSearchApi, '/api/employees/search')
-
 
 # logging
 formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s: %(message)s')
