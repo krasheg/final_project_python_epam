@@ -75,3 +75,31 @@ class TestEmployeeView(BaseTestCase):
         employee_1.save_to_db()
         response = client.get("/employees/1/delete")
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+    def test_search_employee_by_date(self):
+        """
+        test for searching employees by date
+        """
+        client = app.test_client()
+        department_1 = Department('Design', 'Apple')
+        department_1.save_to_db()
+        employee_1 = Employee('Test Employee', date(1956, 5, 12), 2200, department_1)
+        employee_1.save_to_db()
+        client = app.test_client()
+        data = {'date': "12-5-1956"}
+        response = client.post("/employees/search_by_date/", data=data)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_search_employee_by_period(self):
+        """
+        test for searching employees by date
+        """
+        department_1 = Department('New Department', 'New organisation')
+        department_1.save_to_db()
+        employee_1 = Employee('Test Employee', date(1956, 5, 12), 2200, department_1)
+        employee_1.save_to_db()
+        client = app.test_client()
+        data = {'first_date': "11-5-1956",
+                'last_date': "13-5-1956"}
+        response = client.post("/employees/search_by_period/", data=data)
+        self.assertEqual(response.status_code, HTTPStatus.OK)

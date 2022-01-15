@@ -40,10 +40,13 @@ class TestDepartmentView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         department = Department("Created name", "Created organisation")
         department.save_to_db()
-        data = {"name": "Test",
-                "organisation": "Test Organization"}
-        response = client.get('/departments/1/update',data=data)
+        response = client.get('/departments/1/update')
         self.assertEqual(response.status_code, HTTPStatus.OK)
+        data = {"uname": "Test",
+                "uorganisation": "Test Organization"}
+        response = client.post('/departments/1/update',data=data)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
 
 
     def test_delete_department_page(self):
