@@ -33,7 +33,7 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db, directory=Config.MIGRATION_DIR)
 
-db.create_all()
+
 from department_app.views.index_view import index_bp
 from department_app.views.department_view import departments_bp
 from department_app.views.employee_view import employees_bp
@@ -48,10 +48,10 @@ from department_app.rest import department_api, employee_api
 api = Api(app)
 # api for department
 api.add_resource(department_api.DepartmentListApi, '/api/departments')
-api.add_resource(department_api.DepartmentApi, '/api/departments/<id>')
+api.add_resource(department_api.DepartmentApi, '/api/departments/<_id>')
 # api for employee
 api.add_resource(employee_api.EmployeeListApi, '/api/employees')
-api.add_resource(employee_api.EmployeeApi, '/api/employees/<id>')
+api.add_resource(employee_api.EmployeeApi, '/api/employees/<_id>')
 api.add_resource(employee_api.EmployeeSearchApi, '/api/employees/search')
 
 # logging
@@ -76,3 +76,5 @@ werkzeug_logger.handlers.clear()
 werkzeug_logger.addHandler(file_handler)
 werkzeug_logger.addHandler(console_handler)
 werkzeug_logger.setLevel(logging.DEBUG)
+
+db.create_all()

@@ -30,14 +30,14 @@ class DepartmentService:
     @staticmethod
     def get_department_by_id(department_id):
         """
-        method return the department with given id
+        method return the department with given _id
 
-        :param department_id: id of the searched department
-        :return: department with id == department_id
+        :param department_id: _id of the searched department
+        :return: department with _id == department_id
         """
         department = db.session.query(Department).filter_by(id=department_id).first()
         if not department:
-            raise ValueError('No department with id ' + str(department_id))
+            raise ValueError('No department with _id ' + str(department_id))
         return department
 
     @staticmethod
@@ -75,13 +75,13 @@ class DepartmentService:
     def update_department(cls, department_id, department_json):
         """
         returns updated department
-        :param department_id: department`s id, which we will update
+        :param department_id: department`s _id, which we will update
         :param department_json: json data for update
         :return: updated department
         """
         department = cls.get_department_by_id(department_id)
         if not department:
-            raise ValueError('Invalid department id')
+            raise ValueError('Invalid department _id')
         if department_json.get('name'):
             department.name = department_json['name']
         if department_json.get('organisation'):
@@ -92,8 +92,8 @@ class DepartmentService:
     @classmethod
     def delete_department(cls, department_id):
         """
-        delete department from department database by his id
-        :param department_id: id of department to delete
+        delete department from department database by his _id
+        :param department_id: _id of department to delete
         :return: None
         """
         department = cls.get_department_by_id(department_id)

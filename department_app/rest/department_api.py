@@ -50,18 +50,18 @@ class DepartmentApi(Resource):
     """
 
     @staticmethod
-    def get(id):
+    def get(_id):
         """
 
-        return the department with a given id in json format
+        return the department with a given _id in json format
 
         """
         DepartmentService.calc_avg_salary(Department.query.all())
-        department = DepartmentService.get_department_by_id(id).json()
+        department = DepartmentService.get_department_by_id(_id).json()
         return department, 200
 
     @staticmethod
-    def put(id):
+    def put(_id):
         """
         partially updates the existing department
         return: message with result
@@ -70,19 +70,19 @@ class DepartmentApi(Resource):
         if not department_json:
             return {'message': 'Empty request'}, 400
         try:
-            DepartmentService.update_department(id, department_json)
+            DepartmentService.update_department(_id, department_json)
         except ValueError:
             return {'message': 'Bad request'}, 400
         return {"message": 'Department has been successfully updated'}, 200
 
     @staticmethod
-    def delete(id):
+    def delete(_id):
         """
         Delete department
         return result
         """
         try:
-            DepartmentService.delete_department(id)
+            DepartmentService.delete_department(_id)
             return {"message": "Department has been deleted"}, 200
         except ValueError:
             return {'message': 'Cannot delete department'}, 404

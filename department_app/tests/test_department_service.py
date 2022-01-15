@@ -29,7 +29,7 @@ class TestDepartmentService(BaseTestCase):
         test for service get_department_by_id
         """
         department_1 = Department("Security", "Ajax")
-        department_1.save_to_db()  #: id == 1
+        department_1.save_to_db()  #: _id == 1
         result = DepartmentService.get_department_by_id(1)
         self.assertEqual(1, result.id)
         #: check if not department

@@ -31,9 +31,9 @@ class EmployeeService:
     @staticmethod
     def get_employee_by_id(employee_id):
         """
-        method return employee with given id
-        :param employee_id: id of employee
-        :return: employee with given id
+        method return employee with given _id
+        :param employee_id: _id of employee
+        :return: employee with given _id
         """
         employee = db.session.query(Employee).filter_by(id=employee_id).first()
         if not employee:
@@ -65,18 +65,18 @@ class EmployeeService:
         return employee.json()
 
     @classmethod
-    def update_employee(cls, id, employee_json):
+    def update_employee(cls, _id, employee_json):
         """
-        Updates employee data from json and his id
-        :param id: id of employee for update
+        Updates employee data from json and his _id
+        :param id: _id of employee for update
         :param employee_json: data for update
         :return: updated employee
         """
-        employee = cls.get_employee_by_id(id)
+        employee = cls.get_employee_by_id(_id)
         data = employee_json
 
         if not employee:
-            raise KeyError(f"Could not find employee by {id=}")
+            raise KeyError(f"Could not find employee by {_id=}")
         elif data.get('name'):
             employee.name = data['name']
         elif data.get('birth_date'):
@@ -96,12 +96,12 @@ class EmployeeService:
             return {'message': 'An error occurred while saving employee'}
 
     @classmethod
-    def delete_employee(cls, id):
+    def delete_employee(cls, _id):
         """
-        delete employee from database by his id
-        :param id: employee id
+        delete employee from database by his _id
+        :param _id: employee _id
         """
-        employee = cls.get_employee_by_id(id)
+        employee = cls.get_employee_by_id(_id)
         if not employee:
             raise ValueError("Could not find employee")
         db.session.delete(employee)

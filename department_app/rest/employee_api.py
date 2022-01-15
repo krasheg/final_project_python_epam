@@ -1,9 +1,9 @@
 """
 REST operations for working with employees
 """
+from datetime import datetime
 from flask import jsonify, request
 from flask_restful import Resource
-from datetime import datetime
 
 from department_app.service.employee_service import EmployeeService
 
@@ -90,40 +90,40 @@ class EmployeeApi(Resource):
     """
 
     @staticmethod
-    def get(id):
+    def get(_id):
         """
 
-        return the employee with a given id in json format
+        return the employee with a given _id in json format
 
         """
         try:
-            return jsonify(EmployeeService.get_employee_by_id(id).json())
+            return jsonify(EmployeeService.get_employee_by_id(_id).json())
         except:
-            return {'message': f'Couldn`t find employee by {id=}'}, 404
+            return {'message': f'Couldn`t find employee by {_id=}'}, 404
 
     @staticmethod
-    def put(id):
+    def put(_id):
         """
-        update the employee with a given id
+        update the employee with a given _id
         return: message with result
         """
         employee_json = request.json
         if not employee_json:
             return {'message': 'Empty request'}, 400
         try:
-            EmployeeService.update_employee(id, employee_json)
+            EmployeeService.update_employee(_id, employee_json)
         except ValueError:
             return {'message': 'Bad request'}, 400
         return {"message": 'Employee has been successfully updated'}, 200
 
     @staticmethod
-    def delete(id):
+    def delete(_id):
         """
-        Delete employee by his id
+        Delete employee by his _id
         return result
         """
         try:
-            EmployeeService.delete_employee(id)
+            EmployeeService.delete_employee(_id)
             return {"message": "Employee has been deleted"}, 200
         except ValueError:
             return {'message': 'Cannot delete employee'}, 404

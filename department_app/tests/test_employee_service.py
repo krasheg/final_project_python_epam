@@ -28,12 +28,12 @@ class TestEmployeeService(BaseTestCase):
 
     def test_get_employee_by_id(self):
         """
-        test for getting employee by id
+        test for getting employee by _id
         """
         department = Department("Test name", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department)
-        employee_1.save_to_db()  #: id =1
+        employee_1.save_to_db()  #: _id =1
         result = EmployeeService.get_employee_by_id(1)
         self.assertEqual(1, result.id)
         #: check if not department
@@ -89,7 +89,7 @@ class TestEmployeeService(BaseTestCase):
         department = Department("Test name", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department)
-        employee_1.save_to_db()  #: id =1
+        employee_1.save_to_db()  #: _id =1
         new_data = {
             'name': "New name"
         }
@@ -104,10 +104,10 @@ class TestEmployeeService(BaseTestCase):
         department = Department("department", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department)
-        employee_1.save_to_db()  #: id =1
+        employee_1.save_to_db()  #: _id =1
         EmployeeService.delete_employee(1)
         self.assertEqual(0, Employee.query.count())
-        #: bad id
+        #: bad _id
         with self.assertRaises(ValueError):
             EmployeeService.delete_employee(1)
 

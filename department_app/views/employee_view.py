@@ -37,15 +37,15 @@ def add_employee():
     return render_template('employee.html', departments=departments, employees=employees, update=False)
 
 
-@employees_bp.route("/employees/<int:id>/update", methods=["GET", "POST"])
-def update_employee(id):
+@employees_bp.route("/employees/<int:_id>/update", methods=["GET", "POST"])
+def update_employee(_id):
     """
     function for updating employee`s data
 
     """
     #: marker for form
-    #: find employee by his id
-    employee = Employee.query.get(id)
+    #: find employee by his _id
+    employee = Employee.query.get(_id)
     #: all departments in database
     departments = Department.query.all()
     if request.method == 'POST':
@@ -72,11 +72,10 @@ def update_employee(id):
     return render_template('employee.html', employee=employee, update=True, departments=departments)
 
 
-@employees_bp.route("/employees/<int:id>/delete")
-def delete_employee(id):
-    EmployeeService.delete_employee(id)
+@employees_bp.route("/employees/<int:_id>/delete")
+def delete_employee(_id):
+    EmployeeService.delete_employee(_id)
     return redirect('/employees/')
-
 
 
 @employees_bp.route('/employees/')

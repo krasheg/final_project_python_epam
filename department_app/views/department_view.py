@@ -30,12 +30,12 @@ def add_department():
     return render_template('department.html', departments=departments)
 
 
-@departments_bp.route("/departments/<int:id>/update", methods=['POST', 'GET'])
-def update_department(id):
+@departments_bp.route("/departments/<int:_id>/update", methods=['POST', 'GET'])
+def update_department(_id):
     """
-    update department from database id with form data
+    update department from database _id with form data
     """
-    department = Department.query.get(id)
+    department = Department.query.get(_id)
     if request.method == 'POST':
         name = request.form['uname']
         if name:
@@ -53,12 +53,12 @@ def update_department(id):
     return render_template('department.html', department=department)
 
 
-@departments_bp.route("/departments/<int:id>/delete")
-def delete_department(id):
+@departments_bp.route("/departments/<int:_id>/delete")
+def delete_department(_id):
     """
-    deletes department from db by his id
+    deletes department from db by his _id
     """
-    department = Department.query.get(id)
+    department = Department.query.get(_id)
     try:
         db.session.delete(department)
         db.session.commit()

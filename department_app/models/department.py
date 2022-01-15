@@ -11,7 +11,7 @@ class Department(db.Model):
     #: table name for instance of Department_model
     __tablename__ = "department"
 
-    #: unique id for each instance of Department Model
+    #: unique _id for each instance of Department Model
     id = db.Column(db.Integer, primary_key=True)
 
     #: Department`s name, cannot be empty
@@ -44,7 +44,7 @@ class Department(db.Model):
         json representation of department
         :return: dict
         """
-        return {"id": self.id, 'name': self.name, 'organisation': self.organisation,
+        return {"_id": self.id, 'name': self.name, 'organisation': self.organisation,
                 'average_salary': self.average_salary,
                 'employees': [employee.name for employee in self.employees]}
 

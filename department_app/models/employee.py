@@ -12,7 +12,7 @@ class Employee(db.Model):
     #: table name for instance of Employee
     __tablename__ = "employee"
 
-    #: unique id for each instance of Employee Model
+    #: unique _id for each instance of Employee Model
     id = db.Column(db.Integer, primary_key=True)
 
     #: Employee`s name, cannot be empty
@@ -21,7 +21,7 @@ class Employee(db.Model):
     #: Employee`s date of birth, cannot be empty
     birth_date = db.Column(db.Date, nullable=False)
 
-    #: department id`s which employee belongs
+    #: department _id`s which employee belongs
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
 
     #: employee`s salary
@@ -38,7 +38,7 @@ class Employee(db.Model):
         json representation of employee
         :return: dict
         """
-        return {"id": self.id, 'name': self.name, 'birth_date': self.birth_date.strftime("%m-%d-%Y"),
+        return {"_id": self.id, 'name': self.name, 'birth_date': self.birth_date.strftime("%m-%d-%Y"),
                 'salary': self.salary,
                 'department': {'name': self.department.name, "organisation": self.department.organisation}}
 

@@ -19,7 +19,7 @@ class TestEmployeeApi(BaseTestCase):
         test for searching employees in database by date birth or period
         """
         client = app.test_client()
-        department = Department("Test name", "Test organisation")
+        department = Department("Department", "Test organisation")
         department.save_to_db()
         employee_1 = Employee('Jack Sparrow', date(1985, 5, 25), 2200, department)
         employee_1.save_to_db()
@@ -87,18 +87,18 @@ class TestEmployeeApi(BaseTestCase):
 
     def test_get_employee_by_id(self):
         """
-        test for getting employee by id
+        test for getting employee by _id
         """
         department_1 = Department('Engineering', 'Bethesda Softworks')
         department_1.save_to_db()
         employee_1 = Employee('Todd Howard', date(1985, 5, 12), 6000, department_1)
-        employee_1.save_to_db()  #: id=1
+        employee_1.save_to_db()  #: _id=1
         client = app.test_client()
         response = client.get("/api/employees/1", )
         self.assertEqual(employee_1.json(), response.json)
         #: Bad request
         response = client.get("/api/employees/2", )
-        self.assertEqual({'message': "Couldn`t find employee by id='2'"}, response.json)
+        self.assertEqual({'message': "Couldn`t find employee by _id='2'"}, response.json)
 
     def test_put_employee(self):
         """
