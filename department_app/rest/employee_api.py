@@ -71,7 +71,8 @@ class EmployeeListApi(Resource):
         if not employee_json:
             return {'message': 'Empty request'}, 400
 
-        elif not employee_json.get('name') or not employee_json.get('birth_date') or not employee_json.get('salary') or not \
+        elif not employee_json.get('name') or not employee_json.get('birth_date') or not employee_json.get(
+                'salary') or not \
                 employee_json.get('department'):
             return {'message': 'Not enough information'}, 400
 
@@ -126,4 +127,3 @@ class EmployeeApi(Resource):
             return {"message": "Employee has been deleted"}, 200
         except ValueError:
             return {'message': 'Cannot delete employee'}, 404
-

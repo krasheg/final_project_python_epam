@@ -2,66 +2,71 @@
 {% block title %}Departments:{% endblock %}
 
 {% block content %}
-<ul>
-    {% for department in departments %}
-    <br>
-    <div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
-            <h2>{{department.name}}</h2>
-            <p>Organisation: {{department.organisation}}</p>
-            <!--            make a link to employees with employees = department.emplaoyees-->
-            <p>Employees: {{department.employees|length}}</p>
-            <p>Average salary: {{department.average_salary}}</p>
+    <ul>
+        {% for department in departments %}
+            <br>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>{{ department.name }}</h2>
+                    <p>Organisation: {{ department.organisation }}</p>
+                    <!--            make a link to employees with employees = department.emplaoyees-->
+                    <p>Employees: {{ department.employees|length }}</p>
+                    <p>Average salary: {{ department.average_salary }}</p>
 
-                           <!-- Button trigger modal -->
-            <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal" data-bs-target="#exampleModal{{department.id}}">
-                Delete
-            </button>
-            <a href="/departments/{{ department.id }}/update">
-                <button class="btn btn-success float-end" type="button">update</button>
-            </a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{ department.id }}">
+                        Delete
+                    </button>
+                    <a href="/departments/{{ department.id }}/update">
+                        <button class="btn btn-success float-end" type="button">update</button>
+                    </a>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal{{department.id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{department.id}}"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel{{department.id}}">Delete {{department.name}}?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete {{department.name}}, {{department.organisation}}?
-                        </div>
-                        <div class="modal-footer">
-                            <a href="/departments/{{ department.id }}/delete">
-                                <button type="button" class="btn btn-danger">Delete</button>
-                            </a>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ department.id }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel{{ department.id }}"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel{{ department.id }}">
+                                        Delete {{ department.name }}?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete {{ department.name }}, {{ department.organisation }}?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/departments/{{ department.id }}/delete">
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
 
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    </a>
+                    <br>
                 </div>
+
             </div>
-            </a>
+            </div>
+            </div>
             <br>
-        </div>
 
-    </div>
-    </div>
-    </div>
-    <br>
-
-    {% endfor %}
-    <br>
-    <a href="/department/">
-        <button class="btn btn-dark float-start" type="button">add new department</button>
-    </a>
-    <br>
-</ul>
+        {% endfor %}
+        <br>
+        <a href="/department/">
+            <button class="btn btn-dark float-start" type="button">add new department</button>
+        </a>
+        <br>
+    </ul>
 
 
 {% endblock content %}
 {% block script %}
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock script %}

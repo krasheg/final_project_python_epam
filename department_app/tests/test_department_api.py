@@ -91,5 +91,6 @@ class TestDepartmentApi(BaseTestCase):
         self.assertEqual(response.status_code, http.HTTPStatus.NOT_FOUND)
         self.assertEqual(response.json, {'message': 'Cannot delete department'})
 
+
 if __name__ == '__main__':
     unittest.main()

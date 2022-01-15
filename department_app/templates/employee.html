@@ -2,61 +2,62 @@
 {% block title %}Manage employee{% endblock %}
 {% block content %}
 
-{%if update == False%}
-<br>
-<div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Add Employee</h2>
-          <form action="/employee/" method="post">
-                  <label for="name"><h5>Name:</h5></label><br>
-                  <input class="form-control" id="name" name="name" type="text" ><br>
-                  <label for="birth_date"><h5>Birth date:</h5></label><br>
-                  <input class="form-control" type="date" id="birth_date" name="birth_date"><br>
-                  <label for="salary"><h5>Salary:</h5></label><br>
-                  <input class="form-control" id="salary" name="salary" type="number" min="0"><br>
-                  <label for="department"><h5>Department:</h5></label>
-                  <select class="form-control" id="department" name="department">
-                      {% for department in departments%}
-                      <option>{{department.name}}, {{department.organisation}}</option>
-                      {% endfor %}
+    {% if update == False %}
+        <br>
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Add Employee</h2>
+                <form action="/employee/" method="post">
+                    <label for="name"><h5>Name:</h5></label><br>
+                    <input class="form-control" id="name" name="name" type="text"><br>
+                    <label for="birth_date"><h5>Birth date:</h5></label><br>
+                    <input class="form-control" type="date" id="birth_date" name="birth_date"><br>
+                    <label for="salary"><h5>Salary:</h5></label><br>
+                    <input class="form-control" id="salary" name="salary" type="number" min="0"><br>
+                    <label for="department"><h5>Department:</h5></label>
+                    <select class="form-control" id="department" name="department">
+                        {% for department in departments %}
+                            <option>{{ department.name }}, {{ department.organisation }}</option>
+                        {% endfor %}
                     </select>
-                  <br>
+                    <br>
 
-                  <input type="submit" class="btn btn-dark" value="Add employee">
-          </form>
+                    <input type="submit" class="btn btn-dark" value="Add employee">
+                </form>
 
+            </div>
         </div>
-      </div>
-    </div>
-{% else %}
-<br>
-<div class="col-md-6">
-        <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Update Employee</h2>
-          <form action="/employees/{{employee.id}}/update" method="post">
-                  <label for="name"><h5>Name:</h5></label><br>
-                  <input class="form-control" id="uname" name="uname" type="text" value= "{{employee.name}}" ><br>
-                  <label for="birth_date"><h5>Birth date:</h5></label><br>
-                  <input class="form-control" type="date" id="ubirth_date" name="ubirth_date"
-                         value="{{employee.birth_date}}"><br>
-                  <label for="salary"><h5>Salary:</h5></label><br>
-                  <input class="form-control" id="usalary" name="usalary" type="number" min="0"
-                         value="{{employee.salary}}"><br>
-                  <label for="department"><h5>Department:</h5></label>
-                  <select class="form-control" id="udepartment" name="udepartment">
-                      <option value="" disabled selected>{{employee.department.name}}, {{employee.department.organisation}}</option>
-                      {% for department in departments%}
-                      <option>{{department.name}}, {{department.organisation}}</option>
-                      {% endfor %}
+        </div>
+    {% else %}
+        <br>
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Update Employee</h2>
+                <form action="/employees/{{ employee.id }}/update" method="post">
+                    <label for="name"><h5>Name:</h5></label><br>
+                    <input class="form-control" id="uname" name="uname" type="text" value="{{ employee.name }}"><br>
+                    <label for="birth_date"><h5>Birth date:</h5></label><br>
+                    <input class="form-control" type="date" id="ubirth_date" name="ubirth_date"
+                           value="{{ employee.birth_date }}"><br>
+                    <label for="salary"><h5>Salary:</h5></label><br>
+                    <input class="form-control" id="usalary" name="usalary" type="number" min="0"
+                           value="{{ employee.salary }}"><br>
+                    <label for="department"><h5>Department:</h5></label>
+                    <select class="form-control" id="udepartment" name="udepartment">
+                        <option value="" disabled
+                                selected>{{ employee.department.name }}, {{ employee.department.organisation }}</option>
+                        {% for department in departments %}
+                            <option>{{ department.name }}, {{ department.organisation }}</option>
+                        {% endfor %}
                     </select>
-                  <br>
+                    <br>
 
-                  <input type="submit" class="btn btn-dark" value="Update employee">
-          </form>
+                    <input type="submit" class="btn btn-dark" value="Update employee">
+                </form>
 
+            </div>
         </div>
-      </div>
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
 
 {% endblock content %}

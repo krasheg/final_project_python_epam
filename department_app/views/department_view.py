@@ -1,7 +1,7 @@
 # Department view for respond to requests to application.
 
 
-from flask import Blueprint, render_template, request, redirect,url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 from department_app import db
 from department_app.models.department import Department
 from department_app.service.department_service import DepartmentService
@@ -67,7 +67,6 @@ def delete_department(id):
         return redirect("/departments")
     except:
         return "An error occured while deleting department"
-
 
 
 @departments_bp.route("/departments")

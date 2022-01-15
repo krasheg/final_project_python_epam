@@ -33,7 +33,7 @@ def add_employee():
         for employee in employees:
             if employee.name == name and employee.birth_date == birth_date:
                 return redirect('/employees/')
-        department = DepartmentService.get_department_by_name_and_organization(department_name,department_organisation)
+        department = DepartmentService.get_department_by_name_and_organization(department_name, department_organisation)
         if not department:
             return "No such department"
         employee = Employee(name, birth_date, salary, department)
@@ -101,7 +101,7 @@ def show_employees():
     return render_template('employees.html', employees=employees)
 
 
-@employees_bp.route('/employees/search_by_date/', methods=['GET','POST'])
+@employees_bp.route('/employees/search_by_date/', methods=['GET', 'POST'])
 def show_employees_by_date():
     """
     Show all employees born in definite date
@@ -113,7 +113,8 @@ def show_employees_by_date():
         return render_template('employees.html', employees=employees)
     return "An error occurred while returning employee"
 
-@employees_bp.route('/employees/search_by_period/', methods=['GET','POST'])
+
+@employees_bp.route('/employees/search_by_period/', methods=['GET', 'POST'])
 def show_employees_by_period():
     """
     Show all employees born in definite period

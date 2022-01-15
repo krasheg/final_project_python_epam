@@ -6,26 +6,23 @@ from flask_migrate import Migrate
 from flask_restful import Api
 import logging.config
 from config import Config
+from department_app.views.index_view import index_bp
+from department_app.views.department_view import departments_bp
+from department_app.views.employee_view import employees_bp
+from department_app.rest import department_api, employee_api
 
 app = Flask(__name__)
 # apply configuration
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
-
 migrate = Migrate(app, db, directory=Config.MIGRATION_DIR)
-
-from department_app.views.index_view import index_bp
-from department_app.views.department_view import departments_bp
-from department_app.views.employee_view import employees_bp
 
 db.create_all()
 
 app.register_blueprint(index_bp)
 app.register_blueprint(employees_bp)
 app.register_blueprint(departments_bp)
-
-from department_app.rest import department_api, employee_api
 
 # api
 api = Api(app)

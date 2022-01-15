@@ -12,6 +12,7 @@ class TestDepartmentService(BaseTestCase):
     """
     class for department services tests
     """
+
     def test_get_all_departments(self):
         """
         test for service get_all_departments

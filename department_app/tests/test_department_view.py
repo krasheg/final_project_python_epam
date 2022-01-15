@@ -10,6 +10,7 @@ class TestDepartmentView(BaseTestCase):
     """
     class for testing department views
     """
+
     def test_departments_page(self):
         """
         test for departments page
@@ -41,7 +42,6 @@ class TestDepartmentView(BaseTestCase):
         client = app.test_client()
         response = client.get('/departments/1/delete')
         self.assertEqual(response.status_code, HTTPStatus.OK)
-
 
 
 if __name__ == '__main__':
