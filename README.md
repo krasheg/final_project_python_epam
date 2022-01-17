@@ -4,7 +4,7 @@
 
 ***
 Department App is web application for managing departments and employees within organisations. It uses RESTful web
-service to perform CRUD operations. The user is allowed to:
+service to perform CRUD operations.
 
 ***
 
