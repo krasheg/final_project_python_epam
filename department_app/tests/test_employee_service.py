@@ -1,5 +1,5 @@
 """This file consists of tests for employee services"""
-from datetime import datetime, date
+from datetime import date
 import unittest
 from department_app.tests.test_base import BaseTestCase
 from department_app.models.department import Department

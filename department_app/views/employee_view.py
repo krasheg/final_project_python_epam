@@ -95,7 +95,6 @@ def show_employees_by_date():
         date = request.form['date']
         employees = EmployeeService.get_employees_with_certain_birth_date(date)
         return render_template('employees.html', employees=employees)
-    return "An error occurred while returning employee"
 
 
 @employees_bp.route('/employees/search_by_period/', methods=['GET', 'POST'])
@@ -108,4 +107,4 @@ def show_employees_by_period():
         last_date = request.form['last_date']
         employees = EmployeeService.get_employees_born_in_period(first_date, last_date)
         return render_template('employees.html', employees=employees)
-    return "An error occurred while returning employee"
+

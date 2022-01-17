@@ -1,5 +1,4 @@
 """file contains tests for employee views"""
-import json
 from http import HTTPStatus
 from datetime import date
 from department_app.tests.test_base import BaseTestCase
@@ -61,6 +60,9 @@ class TestEmployeeView(BaseTestCase):
                 'ubirth_date': "1980-10-15",
                 'usalary': 300,
                 'udepartment': 'Captains, Black Pearl'}
+        response = client.post("/employees/1/update", data=data)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        #: If employee exist
         response = client.post("/employees/1/update", data=data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 

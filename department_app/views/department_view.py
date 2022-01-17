@@ -43,12 +43,8 @@ def update_department(_id):
         organisation = request.form['uorganisation']
         if organisation:
             department.organisation = organisation
-
-        try:
-            db.session.commit()
-            return redirect("/departments")
-        except:
-            return "An error occured while updating department"
+        db.session.commit()
+        return redirect("/departments")
     return render_template('department.html', department=department)
 
 
@@ -58,12 +54,10 @@ def delete_department(_id):
     deletes department from db by his _id
     """
     department = Department.query.get(_id)
-    try:
-        db.session.delete(department)
-        db.session.commit()
-        return redirect("/departments")
-    except:
-        return "An error occured while deleting department"
+    db.session.delete(department)
+    db.session.commit()
+    return redirect("/departments")
+
 
 
 @departments_bp.route("/departments")

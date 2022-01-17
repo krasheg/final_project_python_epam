@@ -44,18 +44,22 @@ class TestDepartmentView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         data = {"uname": "Test",
                 "uorganisation": "Test Organization"}
-        response = client.post('/departments/1/update',data=data)
+        response = client.post('/departments/1/update', data=data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-
-
+        #: redirect if exist
+        response = client.post('/departments/1/update', data=data)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_delete_department_page(self):
         """
         test for deleting department page
         """
         client = app.test_client()
+        department_1 = Department("Dep for delete", "Org for delete")
+        department_1.save_to_db()
         response = client.get('/departments/1/delete')
-        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(0, Department.query.count())
 
 
 if __name__ == '__main__':
