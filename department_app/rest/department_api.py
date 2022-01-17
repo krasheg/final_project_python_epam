@@ -10,7 +10,6 @@ from department_app.service.department_service import DepartmentService
 class DepartmentListApi(Resource):
     """
     Class for defining department`s list get/put requests
-
     """
 
     @staticmethod
@@ -23,12 +22,9 @@ class DepartmentListApi(Resource):
 
     @staticmethod
     def post():
-        '''
+        """
         Add a new department with request data
-
-        return information about result
-
-        '''
+        """
         department_json = request.json
         if not department_json:
             return {'message': 'Empty request'}, 400
@@ -46,15 +42,12 @@ class DepartmentListApi(Resource):
 class DepartmentApi(Resource):
     """
     Class defines get/put/patch/delete methods for Department
-
     """
 
     @staticmethod
     def get(_id):
         """
-
         return the department with a given _id in json format
-
         """
         DepartmentService.calc_avg_salary(Department.query.all())
         department = DepartmentService.get_department_by_id(_id).json()

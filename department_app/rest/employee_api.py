@@ -12,7 +12,6 @@ def get_date_or_none(date_str, date_format='%m-%d-%Y'):
     """
     Returns date represented by date string and date format or None if date
     string has wrong type/doesn't match the format specified
-
     """
     try:
         return datetime.strptime(date_str, date_format).date()
@@ -28,7 +27,6 @@ class EmployeeSearchApi(Resource):
     @staticmethod
     def get():
         """
-
         finding employees by date of birth
         returns a list of employees in json
         """
@@ -49,7 +47,6 @@ class EmployeeSearchApi(Resource):
 class EmployeeListApi(Resource):
     """
     Class for defining employees list get/put requests
-
     """
 
     @staticmethod
@@ -84,15 +81,12 @@ class EmployeeListApi(Resource):
 class EmployeeApi(Resource):
     """
     Class defines get/put/update/delete methods for Employee
-
     """
 
     @staticmethod
     def get(_id):
         """
-
         return the employee with a given _id in json format
-
         """
         try:
             return jsonify(EmployeeService.get_employee_by_id(_id).json())

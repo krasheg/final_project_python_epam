@@ -1,5 +1,7 @@
+"""
+Department class used to represent department
+"""
 from department_app import db
-
 
 
 class Department(db.Model):
@@ -51,7 +53,6 @@ class Department(db.Model):
     def save_to_db(self):
         """
         saving changes to database
-        :return: None
         """
         db.session.add(self)
         db.session.commit()

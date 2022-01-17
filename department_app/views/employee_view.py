@@ -1,4 +1,5 @@
 """ Views for manage employees on web application"""
+
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect
 from department_app.models.employee import Employee
@@ -14,7 +15,6 @@ def add_employee():
     """
     Show user the page which allows manage employees (add, edit, delete)
     Collect employee's input data from forms and add it to database
-
     """
     departments = Department.query.all()
     employees = Employee.query.all()
@@ -33,16 +33,14 @@ def add_employee():
         employee = Employee(name, birth_date, salary, department)
         employee.save_to_db()
         return redirect('/employees/')
-    return render_template('employee.html', departments=departments, employees=employees, update=False)
+    return render_template('employee.html', departments=departments, employees=employees)
 
 
 @employees_bp.route("/employees/<int:_id>/update", methods=["GET", "POST"])
 def update_employee(_id):
     """
     function for updating employee`s data
-
     """
-    #: marker for form
     #: find employee by his _id
     employee = Employee.query.get(_id)
     #: all departments in database
@@ -65,10 +63,9 @@ def update_employee(_id):
             department = DepartmentService.get_department_by_name_and_organization(department_name,
                                                                                    department_organisation)
             employee.department = department
-
         employee.save_to_db()
         return redirect('/employees/')
-    return render_template('employee.html', employee=employee, update=True, departments=departments)
+    return render_template('employee.html', employee=employee, departments=departments)
 
 
 @employees_bp.route("/employees/<int:_id>/delete")
@@ -93,7 +90,6 @@ def show_employees():
 def show_employees_by_date():
     """
     Show all employees born in definite date
-
     """
     if request.method == 'POST':
         date = request.form['date']
@@ -106,7 +102,6 @@ def show_employees_by_date():
 def show_employees_by_period():
     """
     Show all employees born in definite period
-    :return:
     """
     if request.method == 'POST':
         first_date = request.form['first_date']

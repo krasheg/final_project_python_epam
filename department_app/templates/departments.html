@@ -9,10 +9,8 @@
                 <div class="h-100 p-5 bg-light border rounded-3">
                     <h2>{{ department.name }}</h2>
                     <p>Organisation: {{ department.organisation }}</p>
-                    <!--            make a link to employees with employees = department.emplaoyees-->
                     <p>Employees: {{ department.employees|length }}</p>
                     <p>Average salary: {{ department.average_salary }}</p>
-
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-dark float-end" data-bs-toggle="modal"
                             data-bs-target="#exampleModal{{ department.id }}">

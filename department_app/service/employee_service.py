@@ -1,8 +1,5 @@
 """
-Employee service used to make database queries, this module defines the
-following classes:
-
-- `EmployeeService`, employee service
+Employee service used to make database queries
 """
 from datetime import datetime
 from sqlalchemy import and_
@@ -20,11 +17,10 @@ class EmployeeService:
     def get_employees(cls):
         """
         method return all employees from db
-        :return: list of all employees
         """
         try:
             return db.session.query(Employee).all()
-        except:
+        except ValueError:
             return {"message": "Error while fetching employees"}
 
     @staticmethod
@@ -110,7 +106,6 @@ class EmployeeService:
     def get_employees_with_certain_birth_date(cls, birth_date):
         """
         return employees with certain birthdate
-
         :param birth_date: date of birth
         :return:employees that born on given date
         """

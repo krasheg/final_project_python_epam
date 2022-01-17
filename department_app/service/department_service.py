@@ -1,8 +1,5 @@
 """
-Department service used to make database queries, this module defines the
-following classes:
-
-- `DepartmentService`, department service
+Department service used to make database queries
 """
 
 from department_app import db
@@ -31,9 +28,6 @@ class DepartmentService:
     def get_department_by_id(department_id):
         """
         method return the department with given _id
-
-        :param department_id: _id of the searched department
-        :return: department with _id == department_id
         """
         department = db.session.query(Department).filter_by(id=department_id).first()
         if not department:
@@ -44,9 +38,6 @@ class DepartmentService:
     def get_department_by_name_and_organization(name, organisation):
         """
         method return the department with given name and organisation
-
-        :param name: name of the searched department
-        :param organisation: organisation in which the department is
         :return: department with the same name and organisation like in params
         """
         try:
@@ -61,7 +52,6 @@ class DepartmentService:
     def add_department(department_json):
         """
         method that adds a new department to the database
-        :param department_json: json with department name and organisation
         :return: department
         """
         try:
@@ -75,9 +65,6 @@ class DepartmentService:
     def update_department(cls, department_id, department_json):
         """
         returns updated department
-        :param department_id: department`s _id, which we will update
-        :param department_json: json data for update
-        :return: updated department
         """
         department = cls.get_department_by_id(department_id)
         if not department:
@@ -93,8 +80,6 @@ class DepartmentService:
     def delete_department(cls, department_id):
         """
         delete department from department database by his _id
-        :param department_id: _id of department to delete
-        :return: None
         """
         department = cls.get_department_by_id(department_id)
         if not department:

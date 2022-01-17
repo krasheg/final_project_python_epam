@@ -15,8 +15,6 @@ from department_app import db
 def populate_database():
     """
     Populate database with employees and departments
-
-    :return: None
     """
     department_1 = Department('Captains', 'Black Pearl')
     department_2 = Department('Captains', 'Flying Dutchman')

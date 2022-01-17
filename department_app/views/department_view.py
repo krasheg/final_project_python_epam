@@ -1,5 +1,4 @@
-"""Department view for respond to requests to application."""
-
+"""Department views used to manage departments on web application"""
 
 from flask import Blueprint, render_template, request, redirect
 from department_app import db

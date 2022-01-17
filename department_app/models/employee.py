@@ -1,7 +1,8 @@
+"""
+Employee class used to represent employees
+"""
 from department_app import db
 
-
-# from department import Department
 
 class Employee(db.Model):
     """
@@ -45,7 +46,6 @@ class Employee(db.Model):
     def save_to_db(self):
         """
         saving changes to database
-        :return: None
         """
         db.session.add(self)
         db.session.commit()
