@@ -99,5 +99,7 @@ class DepartmentService:
                         department.employees))
                 except Exception:
                     raise ValueError("Employee`s salary cannot be zero")
+            else:
+                department.average_salary = 0
                 department.save_to_db()
         return departments
