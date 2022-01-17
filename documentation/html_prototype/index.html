@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand">Manage department</a>
+        <a class="navbar-brand">Homepage</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,38 +35,23 @@
     </div>
 </nav>
 
-
-<br>
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>Add Department</h2>
-                <form action="departments.html" method="post">
-                    <label for="name"><h5>Name:</h5></label><br>
-                    <input class="form-control" id="name" name="name" type="text"><br>
-                    <label for="organisation"><h5>Organisation:</h5></label><br>
-                    <input class="form-control" type="text" id="organisation" name="organisation"><br>
-                    <input type="submit" class="btn btn-dark" value="Add department">
-                </form>
-
-            </div>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to departments application</h1>
+            <p class="col-md-8 fs-4">
+            <h1>With this app you can:</h1></p>
+            <h3>
+                <li>Display a list of departments and the average salary (calculated automatically) for these
+                    departments
+                </li>
+                <li>Display a list of employees in the departments with an indication of the salary for each employee
+                    and a
+                    search field to search for employees born on a certain date or in the period between dates
+                </li>
+                <li>Change (add / edit / delete) the above data</li>
+            </h3>
         </div>
-        </div>
-<br>
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>Update Department</h2>
-                <form action="departments.html" method="post">
-                    <label for="uname"><h5>Name:</h5></label><br>
-                    <input class="form-control" id="uname" name="uname" type="text" value="#"><br>
-                    <label for="uorganisation"><h5>Organisation:</h5></label><br>
-                    <input class="form-control" type="text" id="uorganisation" name="uorganisation"
-                           value="#"><br>
-                    <input type="submit" class="btn btn-dark" value="Update">
-                </form>
-
-            </div>
-        </div>
-        </div>
+    </div>
 
 
 
