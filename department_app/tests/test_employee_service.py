@@ -1,5 +1,5 @@
 """This file consists of tests for employee services"""
-from datetime import date
+from datetime import datetime, date
 import unittest
 from department_app.tests.test_base import BaseTestCase
 from department_app.models.department import Department
@@ -85,16 +85,28 @@ class TestEmployeeService(BaseTestCase):
         """
         test for updating employee
         """
-        department = Department("Test name", "Test organisation")
-        department.save_to_db()
-        employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department)
+        department_1 = Department("Test name", "Test organisation")
+        department_1.save_to_db()
+        department_2 = Department("New department", "New organisation")
+        department_2.save_to_db()
+        employee_1 = Employee('Test employee', date(1985, 5, 25), 2200, department_1)
         employee_1.save_to_db()  #: _id =1
         new_data = {
-            'name': "New name"
+            'name': "New name",
+            "department": {
+                "name": "New department",
+                "organisation": "New organisation"
+
+            },
+            "salary": 2500,
+            "birth_date": "10-25-1990"
         }
         EmployeeService.update_employee(1, new_data)
         employee = EmployeeService.get_employee_by_id(1)
-        self.assertEqual("New name", employee.name)
+        self.assertEqual(new_data['name'], employee.name)
+        self.assertEqual(department_2, employee.department)
+        self.assertEqual(new_data['salary'], employee.salary)
+        self.assertEqual(new_data['birth_date'], employee.birth_date.strftime("%m-%d-%Y"))
         #: no such employee
         with self.assertRaises(ValueError):
             EmployeeService.update_employee(2, new_data)

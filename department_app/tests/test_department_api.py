@@ -73,8 +73,11 @@ class TestDepartmentApi(BaseTestCase):
         client = self.app.test_client()
         response = client.put("/api/departments/1", data=json.dumps(new_data), content_type='application/json')
         self.assertEqual(response.status_code, http.HTTPStatus.OK)
-        department.name = "New"
         self.assertEqual(response.json, {'message': 'Department has been successfully updated'})
+        #: empty data
+        new_data = None
+        response = client.put("/api/departments/1", data=json.dumps(new_data), content_type='application/json')
+        self.assertEqual(response.json, {'message': 'Bad request'})
 
     def test_delete_department(self):
         """

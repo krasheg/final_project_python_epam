@@ -67,15 +67,15 @@ class DepartmentService:
         returns updated department
         """
         department = cls.get_department_by_id(department_id)
-        if not department:
-            raise ValueError('Invalid department _id')
-        if department_json.get('name'):
-            department.name = department_json['name']
-        if department_json.get('organisation'):
-            department.organisation = department_json['organisation']
-        department.save_to_db()
-        return department
-
+        try:
+            if department_json.get('name'):
+                department.name = department_json['name']
+            if department_json.get('organisation'):
+                department.organisation = department_json['organisation']
+            department.save_to_db()
+            return department
+        except AttributeError:
+            raise ValueError
     @classmethod
     def delete_department(cls, department_id):
         """

@@ -69,26 +69,22 @@ class EmployeeService:
         """
         employee = cls.get_employee_by_id(_id)
         data = employee_json
-
-        if not employee:
-            raise KeyError(f"Could not find employee by {_id=}")
-        elif data.get('name'):
+        for key in data.keys():
+            if key not in ['name', 'birth_date', 'salary', 'department']:
+                raise ValueError("Incorrect data for employee")
+        if data.get('name'):
             employee.name = data['name']
-        elif data.get('birth_date'):
+        if data.get('birth_date'):
             employee.birth_date = datetime.strptime(data['birth_date'], '%m-%d-%Y')
-        elif data.get('salary'):
+        if data.get('salary'):
             employee.salary = int(data['salary'])
-        elif data.get('department'):
+        if data.get('department'):
             department = DepartmentService.get_department_by_name_and_organization(data['department']['name'],
                                                                                    data['department']['organisation'])
             employee.department = department
-        else:
-            raise ValueError
-        try:
-            employee.save_to_db()
-            return employee
-        except ValueError:
-            return {'message': 'An error occurred while saving employee'}
+
+        employee.save_to_db()
+        return employee
 
     @classmethod
     def delete_employee(cls, _id):
@@ -97,8 +93,6 @@ class EmployeeService:
         :param _id: employee _id
         """
         employee = cls.get_employee_by_id(_id)
-        if not employee:
-            raise ValueError("Could not find employee")
         db.session.delete(employee)
         db.session.commit()
 

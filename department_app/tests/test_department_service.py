@@ -73,10 +73,12 @@ class TestDepartmentService(BaseTestCase):
         """
         department = Department("Test Name", "Test Organization")
         department.save_to_db()
-        update_data = {"name": "New Name"}
+        update_data = {"name": "New Name",
+                       "organisation": "New Organisation"}
         DepartmentService.update_department(1, update_data)
         department = DepartmentService.get_department_by_id(1)
-        self.assertTrue(update_data['name'], department.name)
+        self.assertEqual(update_data['name'], department.name)
+        self.assertEqual(update_data['organisation'],department.organisation)
 
         #: Bad data
         with self.assertRaises(ValueError):

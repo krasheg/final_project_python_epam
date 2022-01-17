@@ -60,8 +60,6 @@ class DepartmentApi(Resource):
         return: message with result
         """
         department_json = request.json
-        if not department_json:
-            return {'message': 'Empty request'}, 400
         try:
             DepartmentService.update_department(_id, department_json)
         except ValueError:
