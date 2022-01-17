@@ -44,6 +44,9 @@ class TestEmployeeView(BaseTestCase):
         department_1.save_to_db()
         response = client.post('/employee/', data=data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        #: If employee exist
+        response = client.post("/employee/", data=data)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
     def test_update_employee_page(self):
         """
