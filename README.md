@@ -28,7 +28,7 @@ __Project uses python v.3.9__
 
 > `source venv/bin/activate` On linux
 
-> `cd venv/Scripts/activate` On Windows
+> `.\venv\Scripts\activate` On Windows
 
 ### How to install project packages:
 
@@ -43,7 +43,7 @@ __Project uses python v.3.9__
 > `flask db update`
 ***
 
-##### After these steps you can see the index page of the application:
+##### After these steps you can move to the index page of the application and go through the web pages:
 
 `localhost:5000/`
 
@@ -69,9 +69,9 @@ or
 * GET - show department by id
 * PUT - update department by given data:
 
-  `{'name': 'Department name' }`
+  `{'name': 'Department name'}`
   or
-  `{'organisation': 'Department organisation' }`
+  `{'organisation': 'Department organisation'}`
 * DELETE - delete department by given id
 
 > `localhost:5000/api/employees`
@@ -102,7 +102,7 @@ or
 
 > `localhost:5000/api/employees/search`
 
-* GET - show employees by birth date if `{
+* GET - show employees by date of birth if `{
   "date": "MM-DD-YYY"
   }` or show employees born in period if `{
   "first_date": "MM-DD-YYY",
