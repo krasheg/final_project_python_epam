@@ -15,6 +15,7 @@ The application should provide such functionality:
    department
 
 5. Ability to assign an employee to the department
+
 6. Search employee by date of birth or period
 
 ***
@@ -39,7 +40,7 @@ Display the list of departments
 
 #### Main scenario:
 
-User clicks the 'Departments' which redirects them to the departments page where they can see the following:
+User clicks the 'Departments' which redirects them to the department`s page where they can see the following:
 
 1. Department (name of the department)
 
@@ -51,7 +52,7 @@ User clicks the 'Departments' which redirects them to the departments page where
 
 5. Update (when clicked redirects to the edit departments page where user can edit current department)
 
-6. Delete (Delete a department without any redirects)
+6. Delete (Delete a department after confirmation)
 
 ![alt text](screenshots/departments.PNG)
 
@@ -72,15 +73,15 @@ about department.
 
 Pic. 3.1 Update department page
 ***
-Also user can click on "delete" button opposite chosen department to delete it.
+Also user can click on "delete" button opposite chosen department to delete it after confirmation.
 
 ![alt text](screenshots/delete_department.PNG)
 
 Pic. 3.2 Delete departments
 ***
 
-In the very bottom of the departments page user can click "add department" button which redirects them to the department
-creation page were he can create a new department
+In the very bottom of the department`s page user can click "add department" button which redirects them to the
+department creation page where he can create a new department
 
 ![alt text](screenshots/add_new_department.PNG)
 
@@ -93,7 +94,7 @@ Display the list of employees
 
 #### Main scenario:
 
-User clicks the 'Employees' button which redirects them to the employees page where they can see the following:
+User clicks the 'Employees' button which redirects them to the employee`s page where they can see the following:
 
 1. Employee (name of the employee)
 
@@ -105,7 +106,7 @@ User clicks the 'Employees' button which redirects them to the employees page wh
 
 5. Update button (when clicked redirects to the manage employee page where user can change info about employee)
 
-6. Delete button (delete an employee )
+6. Delete button (delete an employee after confirmation)
 
 ![alt text](screenshots/employees.PNG)
 
@@ -125,14 +126,14 @@ them to the employees manage page where they can change the information about ch
 
 Pic. 4.1 Update employee page
 ***
-Also user can click on "delete" button opposite chosen department to delete it.
+Also user can click on "delete" button opposite chosen department to delete it after confirmation.
 
 ![alt text](screenshots/delete_employee.PNG)
 
 Pic. 4.2 Delete employee
 ***
-In the very bottom of the employees page user can click "add employee" button which redirects them to the employee
-creation page were he can create a new employee
+In the very bottom of the employee`s page user can click "add employee" button which redirects them to the employee
+creation page where he can create a new employee
 
 ![alt text](screenshots/add_new_employee.PNG)
 
@@ -145,8 +146,8 @@ Display the list of employees that born in a chosen date or period
 
 #### Main scenario:
 
-User clicks the 'Search by date' dropdown menu and choose date or date period which redirects them to the page with employees
-that born in searched date or period
+User clicks the 'Search by date' dropdown menu and choose date or date period which redirects them to the page with
+employees that born in searched date or period
 
 ![alt text](screenshots/employees_search.PNG)
 Pic. 5 Search employees
